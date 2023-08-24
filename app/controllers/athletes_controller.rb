@@ -25,6 +25,8 @@ class AthletesController < ApplicationController
     password = Rails.application.credentials.dig(:all_environments, :fri, :password)
 
     @athlete = Athlete.new(athlete_params)
+
+    #login
     api_response = HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/login', {
       body: {
         username: username,
@@ -32,11 +34,40 @@ class AthletesController < ApplicationController
       }.to_json,
       headers: { 'Content-Type' => 'application/json' }
     })
-    api_data = JSON.parse(api_response.body)
-    p api_data
 
+    api_data = JSON.parse(api_response.body)
     sessionId = api_data['responseContent']['sessionId']
     
+    #ask for payment
+    api_response2 = HTTParty.post('https://api.negocios.soyfri.com/business/transactions/v1/requests/send', {
+      body: {
+        info: {},
+        requestContent: {
+          friUsername: "diegoyon",
+          amount: "10",
+          reference: "high-ground-#{SecureRandom.hex(4)}",
+        }
+      }.to_json,
+      headers: {
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{sessionId}"
+      }
+    })
+
+    #logout
+    HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/logout', {
+      body: {
+        info: {}
+      }.to_json,
+      headers: {
+        'Content-Type' => 'application/json',
+        'Authorization' => "Bearer #{sessionId}"
+      }
+    })
+
+    api_data = JSON.parse(api_response2.body)
+    p api_data
+
     if api_data['info']['type'] == 'success'
       respond_to do |format|
         if @athlete.save
