@@ -21,68 +21,20 @@ class AthletesController < ApplicationController
 
   # POST /athletes or /athletes.json
   def create
-    username = Rails.application.credentials.dig(:all_environments, :fri, :username)
-    password = Rails.application.credentials.dig(:all_environments, :fri, :password)
-
     @athlete = Athlete.new(athlete_params)
-
-    #login
-    api_response = HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/login', {
-      body: {
-        username: username,
-        password: password
-      }.to_json,
-      headers: { 'Content-Type' => 'application/json' }
-    })
-
-    api_data = JSON.parse(api_response.body)
-    sessionId = api_data['responseContent']['sessionId']
-    
-    #ask for payment
-    api_response2 = HTTParty.post('https://api.negocios.soyfri.com/business/transactions/v1/requests/send', {
-      body: {
-        info: {},
-        requestContent: {
-          friUsername: "diegoyon",
-          amount: "10",
-          reference: "high-ground-#{SecureRandom.hex(4)}",
-        }
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{sessionId}"
-      }
-    })
-
-    #logout
-    HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/logout', {
-      body: {
-        info: {}
-      }.to_json,
-      headers: {
-        'Content-Type' => 'application/json',
-        'Authorization' => "Bearer #{sessionId}"
-      }
-    })
-
-    api_data = JSON.parse(api_response2.body)
-    p api_data
-
-    if api_data['info']['type'] == 'success'
-      respond_to do |format|
-        if @athlete.save
-          format.html { redirect_to athlete_url(@athlete), notice: "Athlete was successfully created." }
-          format.json { render :show, status: :created, location: @athlete }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @athlete.errors, status: :unprocessable_entity }
-        end
+    if @athlete.valid?
+      api_data = request_payment
+      if api_data['info']['type'] == 'success'
+        @athlete.save
+        redirect_to success_path, notice: "Hemos recibido tus datos correctamente."
+      elsif api_data['info']['type'] == 'error'
+        @athlete.errors.add(:base, api_data['info']['message'])
+        render :new, status: :unprocessable_entity
+      else
+        render :new, status: :unprocessable_entity
       end
     else
-      respond_to do |format|
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @athlete.errors, status: :unprocessable_entity }
-      end
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -117,6 +69,53 @@ class AthletesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def athlete_params
-      params.require(:athlete).permit(:first_name, :last_name, :email, :phone)
+      params.require(:athlete).permit(:first_name, :last_name, :email, :phone, :fri_username)
     end
+
+    def request_payment
+      username = Rails.application.credentials.dig(:all_environments, :fri, :username)
+      password = Rails.application.credentials.dig(:all_environments, :fri, :password)
+
+      # Login
+      api_response_login = HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/login', {
+        body: {
+          username: username,
+          password: password
+        }.to_json,
+        headers: { 'Content-Type' => 'application/json' }
+      })
+
+      api_data = JSON.parse(api_response_login.body)
+      sessionId = api_data['responseContent']['sessionId']
+
+      # Request payment
+      api_response_request_payment = HTTParty.post('https://api.negocios.soyfri.com/business/transactions/v1/requests/send', {
+        body: {
+          info: {},
+          requestContent: {
+            friUsername: @athlete.fri_username,
+            amount: "10",
+            reference: "high-ground-#{SecureRandom.hex(4)}",
+          }
+        }.to_json,
+        headers: {
+          'Content-Type' => 'application/json',
+          'Authorization' => "Bearer #{sessionId}"
+        }
+      })
+
+      # Logout
+      HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/logout', {
+        body: {
+          info: {}
+        }.to_json,
+        headers: {
+          'Content-Type' => 'application/json',
+          'Authorization' => "Bearer #{sessionId}"
+        }
+      })
+
+      JSON.parse(api_response_request_payment.body)
+    end
+
 end
