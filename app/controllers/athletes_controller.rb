@@ -21,13 +21,34 @@ class AthletesController < ApplicationController
 
   # POST /athletes or /athletes.json
   def create
-    @athlete = Athlete.new(athlete_params)
+    username = Rails.application.credentials.dig(:all_environments, :fri, :username)
+    password = Rails.application.credentials.dig(:all_environments, :fri, :password)
 
-    respond_to do |format|
-      if @athlete.save
-        format.html { redirect_to athlete_url(@athlete), notice: "Athlete was successfully created." }
-        format.json { render :show, status: :created, location: @athlete }
-      else
+    @athlete = Athlete.new(athlete_params)
+    api_response = HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/login', {
+      body: {
+        username: username,
+        password: password
+      }.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    })
+    api_data = JSON.parse(api_response.body)
+    p api_data
+
+    sessionId = api_data['responseContent']['sessionId']
+    
+    if api_data['info']['type'] == 'success'
+      respond_to do |format|
+        if @athlete.save
+          format.html { redirect_to athlete_url(@athlete), notice: "Athlete was successfully created." }
+          format.json { render :show, status: :created, location: @athlete }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @athlete.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @athlete.errors, status: :unprocessable_entity }
       end
