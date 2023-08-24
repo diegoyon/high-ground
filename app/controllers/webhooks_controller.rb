@@ -7,6 +7,7 @@ class WebhooksController < ApplicationController
 
     if matching_athlete
       matching_athlete.payment_status = payload['status']
+      matching_athlete.fri_webhook_response = payload
       matching_athlete.save
     else
       p '###########################'
