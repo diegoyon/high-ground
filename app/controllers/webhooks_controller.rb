@@ -9,11 +9,11 @@ class WebhooksController < ApplicationController
       matching_athlete.payment_status = payload['status']
       matching_athlete.fri_webhook_response = payload
       matching_athlete.save
+      render json: { message: 'ok' }
     else
       p '###########################'
       p 'No matching athlete found'
+      render json: { message: 'no matching athlete found' }
     end
-
-    render json: { message: 'ok' }
   end
 end
