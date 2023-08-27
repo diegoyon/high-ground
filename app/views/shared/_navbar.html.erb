@@ -1,7 +1,9 @@
 <header class="container mx-auto" data-controller="toggle">
   <nav class="relative bg-white flex justify-between py-6 items-center" >
 
-    <p class="mx-5">Logo</p>
+    <%= link_to root_path do %>
+      <%= image_tag 'logo.png', alt: 'logo', class: 'mx-5 h-20' %>
+    <% end %>
 
     <button class="mx-5 w-fit lg:hidden" data-action="click->toggle#menu">
       <div data-toggle-target="hamburger">
@@ -12,11 +14,11 @@
       </div>
     </button>
 
-    <ul class="w-full top-20 opacity-0 transition-all duration-300 ease-in text-lg bg-white absolute uppercase lg:flex lg:static lg:opacity-100 lg:w-fit lg:text-base" data-toggle-target="menu">
-      <li class="mx-5 my-6 text-right">Inicio</li>
-      <li class="mx-5 my-6 text-right">Sobre Nosotros</li>
-      <li class="mx-5 my-6 text-right">Contacto</li>
-      <li class="mx-5 my-6 text-right">Inscríbete</li>
+    <ul class="py-5 px-5 flex flex-col items-end gap-6 w-full top-28 opacity-0 transition-all duration-300 ease-in text-lg bg-white absolute uppercase lg:flex-row lg:items-center lg:static lg:opacity-100 lg:w-fit lg:text-base" data-toggle-target="menu">
+      <li>Inicio</li>
+      <li>Sobre Nosotros</li>
+      <li>Contacto</li>
+      <%= link_to 'Inscríbete', new_athlete_path, class: "rounded-lg py-2 px-4 border-2 border-hg-purple text-hg-purple block font-semibold uppercase w-fit hover:bg-hg-purple hover:text-white duration-200 hover:ease-in" %>
     </ul>
 
   </nav>

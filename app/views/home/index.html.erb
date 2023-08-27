@@ -1,4 +1,9 @@
-<div>
-  <h1 class="font-bold text-4xl">HIGH GROUND FITNESS COMPETITION</h1>
-  <%= link_to 'Inscribete', new_athlete_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+<div class="flex flex-col lg:flex-row w-full">
+  <%= image_tag 'logo.png', alt: 'logo', class: 'mx-5 h-52 object-contain lg:order-last lg:h-96 lg:flex-1' %>
+  <div class="lg:flex-1">
+    <h1 class="font-bold text-8xl">HIGH GROUND</h1>
+    <h2 class="font-bold text-5xl">FITNESS COMPETITION</h2>
+    <h3 class="text-lg text-gray-600 max-w-lg my-7">¡Prepárate para competir y demostrar tu fitness! Nuestra competencia está abierta a cualquier atleta buscando ponerse a prueba y empujar sus límites.</h3>
+    <%= link_to 'Inscríbete', new_athlete_path, class: "rounded-lg py-3 px-5 bg-hg-purple text-white block font-semibold uppercase w-fit" %>
+  </div>
 </div>

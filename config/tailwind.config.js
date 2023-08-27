@@ -12,6 +12,10 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        'hg-purple': '#e81f9b',
+        'hg-cyan': '#5ce1e6',
+      }
     },
   },
   plugins: [
