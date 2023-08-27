@@ -1,29 +1,24 @@
-<nav class="container flex justify-between py-12 w-100 mx-auto items-center" data-controller="toggle">
+<header class="container mx-auto" data-controller="toggle">
+  <nav class="relative bg-white flex justify-between py-6 items-center" >
 
-  <p class="mx-5">Logo</p>
+    <p class="mx-5">Logo</p>
 
-  <button class="mx-5 w-fit lg:hidden" data-action="click->toggle#menu">
-    <div data-toggle-target="hamburger">
-      <i class="fa-solid fa-bars"></i>
-    </div>
-    <div class="hidden" data-toggle-target="close">
-      <i class="fa-solid fa-xmark"></i>
-    </div>
-  </button>
+    <button class="mx-5 w-fit lg:hidden" data-action="click->toggle#menu">
+      <div data-toggle-target="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <div class="hidden" data-toggle-target="close">
+        <i class="fa-solid fa-xmark"></i>
+      </div>
+    </button>
 
-  <ul class="hidden lg:flex">
-    <li class="mx-5">Inicio</li>
-    <li class="mx-5">Sobre Nosotros</li>
-    <li class="mx-5">Contacto</li>
-    <li class="mx-5">Inscríbete</li>
-  </ul>
+    <ul class="w-full top-20 opacity-0 transition-all duration-300 ease-in text-lg bg-white absolute uppercase lg:flex lg:static lg:opacity-100 lg:w-fit lg:text-base" data-toggle-target="menu">
+      <li class="mx-5 my-6 text-right">Inicio</li>
+      <li class="mx-5 my-6 text-right">Sobre Nosotros</li>
+      <li class="mx-5 my-6 text-right">Contacto</li>
+      <li class="mx-5 my-6 text-right">Inscríbete</li>
+    </ul>
 
+  </nav>
 
-  <ul class="hidden" data-toggle-target="menu">
-    <li class="mx-5">Inicio</li>
-    <li class="mx-5">Sobre Nosotros</li>
-    <li class="mx-5">Contacto</li>
-    <li class="mx-5">Inscríbete</li>
-  </ul>
-</nav>
-
+</header>
