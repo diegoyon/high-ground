@@ -1,0 +1,29 @@
+<nav class="container flex justify-between py-12 w-100 mx-auto items-center" data-controller="toggle">
+
+  <p class="mx-5">Logo</p>
+
+  <button class="mx-5 w-fit lg:hidden" data-action="click->toggle#menu">
+    <div data-toggle-target="hamburger">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+    <div class="hidden" data-toggle-target="close">
+      <i class="fa-solid fa-xmark"></i>
+    </div>
+  </button>
+
+  <ul class="hidden lg:flex">
+    <li class="mx-5">Inicio</li>
+    <li class="mx-5">Sobre Nosotros</li>
+    <li class="mx-5">Contacto</li>
+    <li class="mx-5">Inscríbete</li>
+  </ul>
+
+
+  <ul class="hidden" data-toggle-target="menu">
+    <li class="mx-5">Inicio</li>
+    <li class="mx-5">Sobre Nosotros</li>
+    <li class="mx-5">Contacto</li>
+    <li class="mx-5">Inscríbete</li>
+  </ul>
+</nav>
+
