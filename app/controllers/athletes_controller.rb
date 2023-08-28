@@ -88,8 +88,9 @@ class AthletesController < ApplicationController
         }.to_json,
         headers: { 'Content-Type' => 'application/json' }
       })
-
+      p "#############"
       api_data = JSON.parse(api_response_login.body)
+      p api_data
       sessionId = api_data['responseContent']['sessionId']
 
       # Request payment

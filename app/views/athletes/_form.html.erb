@@ -42,11 +42,21 @@
   </div>
 
   <div class="my-5">
-    <%= form.label "Usuario Fri (se utilizará para el pago)" %>
+    <%= form.label "Usuario Fri que se utilizará para el pago" %>
     <%= form.text_field :fri_username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <div class="shadow-lg p-5 my-3 lg:hidden">
+    <div class="flex w-full justify-between ">
+      <p>1x Ticket</p>
+      <p>Q. 500</p>
+    </div>
+    <p class="text-gray-500 text-sm">*No se aceptan reembolsos ni devoluciones.</p>
+  </div>
+
+  <%= link_to 'Cancelar', root_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-semibold" %>
+  
   <div class="inline">
-    <%= form.submit "Pagar", class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    <%= form.submit "Pagar", class: "rounded-lg py-3 px-5 bg-hg-purple text-white inline-block font-semibold cursor-pointer" %>
   </div>
 <% end %>
