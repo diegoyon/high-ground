@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_25_053539) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_152502) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_053539) do
     t.jsonb "fri_webhook_response"
     t.string "tshirt_size"
     t.string "box"
+    t.string "division"
   end
 
 end

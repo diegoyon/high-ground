@@ -6,4 +6,5 @@ class Athlete < ApplicationRecord
   validates :fri_username, presence: true, length: { maximum: 50 }
   validates :tshirt_size, presence: true
   validates :box, presence: true, length: { maximum: 50 }
+  validates :division, presence: true
 end
