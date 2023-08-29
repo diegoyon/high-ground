@@ -5,6 +5,15 @@ class CreateAthletes < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :email
       t.string :phone
+      t.string :fri_username
+      t.string :tshirt_size
+      t.string :box
+      t.string :division
+      t.string :payment_status
+      t.integer :transaction_id
+      t.jsonb :fri_request_payment_response
+      t.jsonb :fri_transaction_status_response
+      t.jsonb :fri_webhook_response
 
       t.timestamps
     end
