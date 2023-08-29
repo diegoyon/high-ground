@@ -6,11 +6,8 @@
     <%= render "form", athlete: @athlete %>
   </div>
 
-  <div class="hidden shadow-lg p-5 my-3 lg:block lg:self-start lg:w-2/3 lg:mr-5">
-    <div class="flex w-full justify-between ">
-      <p>1x Ticket</p>
-      <p>Q. 500</p>
-    </div>
-    <p class="text-gray-500 text-sm">*No se aceptan reembolsos ni devoluciones.</p>
+  <div class="hidden lg:block lg:self-start lg:w-2/3 lg:mr-5">
+    <%= render "shared/fri_total_price" %>
   </div>
+  
 </div>
