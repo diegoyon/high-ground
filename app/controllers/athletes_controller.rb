@@ -27,8 +27,7 @@ class AthletesController < ApplicationController
       if api_data['info']['type'] == 'success'
         @athlete.fri_request_payment_response = api_data['responseContent']
         @athlete.payment_status = api_data['responseContent']['transaction']['status']
-        @athlete.payment_request_id = api_data['responseContent']['transaction']['paymentRequestId']
-        @athlete.reference = api_data['responseContent']['transaction']['reference']
+        @athlete.payment_transaction_id = api_data['responseContent']['transaction']['id']
         @athlete.save
         redirect_to success_path, notice: "Hemos recibido tus datos correctamente."
       elsif api_data['info']['type'] == 'error'
