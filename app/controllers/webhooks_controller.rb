@@ -3,7 +3,7 @@ class WebhooksController < ApplicationController
 
   def fri
     payload = JSON.parse(request.body.read)
-    matching_athlete = Athlete.find_by(payment_request_id: payload['paymentRequestId'], reference: payload['reference'])
+    matching_athlete = Athlete.find_by(transaction_id: payload['id'])
 
     if matching_athlete
       matching_athlete.payment_status = payload['status']
