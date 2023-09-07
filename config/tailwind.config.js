@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         'hg-purple': '#e81f9b',
         'hg-cyan': '#5ce1e6',
+        'hg-black': '#263940'
       }
     },
   },
