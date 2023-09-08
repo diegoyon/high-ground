@@ -3,7 +3,7 @@
   <div class="lg:flex-1">
     <h1 class="font-extrabold text-6xl lg:text-8xl text-hg-black">HIGH GROUND</h1>
     <h2 class="font-extrabold text-3xl lg:text-5xl text-hg-black">FITNESS COMPETITION</h2>
-    <h3 class="text-lg text-gray-600 max-w-lg my-7">¡Prepárate para competir y demostrar tu fitness! Nuestra competencia está abierta a cualquier atleta buscando ponerse a prueba y empujar sus límites.</h3>
+    <h3 class="text-lg text-gray-600 max-w-lg my-7 max">¡Prepárate para competir y demostrar tu fitness! Nuestra competencia está abierta a cualquier atleta buscando ponerse a prueba y empujar sus límites.</h3>
     <%= link_to 'Inscríbete', new_athlete_path, class: "rounded-lg py-3 px-5 bg-hg-purple text-white block font-semibold uppercase w-fit" %>
   </div>
 </section>
@@ -27,5 +27,23 @@
       'Nuestro programa de eventos está diseñado para poner a prueba a los atletas en diferentes dominios del fitness, encontrando así, al atleta más completo al final de esta competencia.'
     ) %>
     
+  </div>
+</section>
+
+<section class="container mx-auto flex flex-col gap-5 py-16">
+  <h2 class="text-4xl font-bold text-center">PATROCINADORES</h2>
+  <div class="grid grid-cols-1 mx-5 px-10 justify-items-center items-center lg:grid-cols-2">
+    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
+      <%= image_tag 'bi_horizontal', alt: 'Banco Industrial' %>
+    </div>
+    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
+      <%= image_tag 'doer_horizontal', alt: 'Doer Fitness' %>
+    </div>
+    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
+      <%= image_tag 'fri_blue', alt: 'Fri', class: 'h-24' %>
+    </div>
+    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
+      <%= image_tag 'powerade', alt: 'Powerade' %>
+    </div>
   </div>
 </section>
