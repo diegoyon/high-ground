@@ -7,3 +7,25 @@
     <%= link_to 'Inscríbete', new_athlete_path, class: "rounded-lg py-3 px-5 bg-hg-purple text-white block font-semibold uppercase w-fit" %>
   </div>
 </section>
+
+<section class="bg-hg-black py-16">
+  <div class="container mx-auto flex flex-col gap-10 lg:flex-row">
+
+    <%= card_content(
+      content_tag(:i, class: 'fa-solid fa-user-group fa-5x', style: 'color: #ffffff;') {},
+      'Categorías',
+      'Con el propósito de crear una competencia lo más justa posible, contamos con tres diferentes categorías: Scaled, Intermedio y RX'
+    ) %>
+    <%= card_content(
+      content_tag(:i, class: 'fa-solid fa-trophy fa-5x', style: 'color: #ffffff;') {},
+      'Premios',
+      'Los primeros tres lugares de cada categoría recibirán premios en efectivo.'
+    ) %>
+    <%= card_content(
+      content_tag(:i, class: 'fa-solid fa-cubes fa-5x', style: 'color: #ffffff;') {},
+      'Eventos',
+      'Nuestro programa de eventos está diseñado para poner a prueba a los atletas en diferentes dominios del fitness, encontrando así, al atleta más completo al final de esta competencia.'
+    ) %>
+    
+  </div>
+</section>
