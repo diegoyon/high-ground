@@ -3,5 +3,7 @@ class HomeController < ApplicationController
   end
 
   def success
+    p '########################'
+    p params[:checkout_id]
   end
 end
