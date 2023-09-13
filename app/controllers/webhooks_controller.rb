@@ -16,4 +16,8 @@ class WebhooksController < ApplicationController
       render json: { message: 'no matching athlete found' }
     end
   end
+
+  def recurrente
+    render json: { message: 'ok' }
+  end
 end

@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root "home#index"
   get "/success", to: "home#success"
   post "webhooks/fri", to: "webhooks#fri"
+  post "webhooks/recurrente", to: "webhooks#recurrente"
 end
