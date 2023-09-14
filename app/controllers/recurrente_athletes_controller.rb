@@ -88,8 +88,8 @@ class RecurrenteAthletesController < ApplicationController
         body: { items: 
           [{
             price_id: "prod_xrhjrg0h",
-            user_id: userId
-          }] 
+          }],
+          user_id: userId
           }.to_json,
         headers: { 'Content-Type' => 'application/json', 'X-PUBLIC-KEY' => public_key, 'X-SECRET-KEY' => secret_key }
       })
