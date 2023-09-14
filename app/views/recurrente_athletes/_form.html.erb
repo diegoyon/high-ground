@@ -1,8 +1,8 @@
-<%= form_with(model: athlete, class: "contents") do |form| %>
-  <% if athlete.errors.any? %>
+<%= form_with(model: recurrente_athlete, class: "contents") do |form| %>
+  <% if recurrente_athlete.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <ul>
-        <% athlete.errors.each do |error| %>
+        <% recurrente_athlete.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -44,18 +44,13 @@
     <%= form.select :division, ['Scaled Femenino', 'Intermedio Femenino', 'Scaled Masculino', 'Intermedio Masculino', 'RX Masculino'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label "Usuario Fri que se utilizará para el pago" %>
-    <%= form.text_field :fri_username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
   <div class="lg:hidden">
-    <%= render "shared/fri_total_price" %>
+    <%= render "shared/recurrente_total_price" %>
   </div>
 
   <%= link_to 'Cancelar', root_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-200 inline-block font-semibold" %>
   
   <div class="inline">
-    <%= form.submit "Enviar", class: "rounded-lg py-3 px-5 bg-hg-purple text-white inline-block font-semibold cursor-pointer" %>
+    <%= form.submit "Continuar al pago", class: "rounded-lg py-3 px-5 bg-hg-purple text-white inline-block font-semibold cursor-pointer" %>
   </div>
 <% end %>
