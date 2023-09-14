@@ -1,8 +1,6 @@
 <%= form_with(model: recurrente_athlete, class: "contents") do |form| %>
   <% if recurrente_athlete.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(recurrente_athlete.errors.count, "error") %> prohibited this recurrente_athlete from being saved:</h2>
-
       <ul>
         <% recurrente_athlete.errors.each do |error| %>
           <li><%= error.full_message %></li>
