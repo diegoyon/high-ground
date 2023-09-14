@@ -24,7 +24,10 @@ class RecurrenteAthletesController < ApplicationController
     @recurrente_athlete = RecurrenteAthlete.new(recurrente_athlete_params)
     if @recurrente_athlete.valid?
       recurrente_user = create_recurrente_user("#{@recurrente_athlete[:first_name]} #{@recurrente_athlete[:last_name]}", @recurrente_athlete[:email])
-      checkout_url = create_checkout(recurrente_user)
+      checkout_data = create_checkout(recurrente_user)
+      checkout_id = checkout_data['id']
+      checkout_url = checkout_data['checkout_url']
+      @recurrente_athlete.checkout_id = checkout_id
       @recurrente_athlete.save
       redirect_to checkout_url, allow_other_host: true
     else
@@ -94,7 +97,6 @@ class RecurrenteAthletesController < ApplicationController
         headers: { 'Content-Type' => 'application/json', 'X-PUBLIC-KEY' => public_key, 'X-SECRET-KEY' => secret_key }
       })
       api_data = JSON.parse(api_response_create_checkout.body)
-      checkout_url = api_data['checkout_url']
-      checkout_url
+      api_data
     end
 end
