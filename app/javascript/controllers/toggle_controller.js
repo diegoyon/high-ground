@@ -10,15 +10,15 @@ export default class extends Controller {
   }
 
   show() {
-    this.menuTarget.classList.remove('max-h-0', 'opacity-0')
-    this.menuTarget.classList.add('max-h-none', 'opacity-100')
+    this.menuTarget.classList.remove('opacity-0', 'top-[-8rem]')
+    this.menuTarget.classList.add('opacity-100', 'top-28')
     this.hamburgerTarget.classList.add('hidden')
     this.closeTarget.classList.remove('hidden')
   }
 
   hide() {
-    this.menuTarget.classList.add('max-h-0', 'opacity-0')
-    this.menuTarget.classList.remove('max-h-none', 'opacity-100')
+    this.menuTarget.classList.add('opacity-0', 'top-[-8rem]')
+    this.menuTarget.classList.remove('opacity-100', 'top-28')
     this.hamburgerTarget.classList.remove('hidden')
     this.closeTarget.classList.add('hidden')
   }
