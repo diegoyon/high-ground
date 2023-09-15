@@ -14,7 +14,7 @@ Rails.application.configure do
     # policy.style_src   :self, :https
     # Specify URI for violation reports
     # policy.report_uri "/csp-violation-report-endpoint"
-    policy.frame_src :self, "https://www.youtube.com/embed/YpmgmtzmYDs?si=yrWWJNEXHlbsMKuv"
+    policy.frame_src :self, "https://www.youtube.com/embed/YpmgmtzmYDs"
   end
 #
 #   # Generate session nonces for permitted importmap and inline scripts
