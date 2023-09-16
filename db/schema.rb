@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_14_045403) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_16_033651) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_14_045403) do
     t.jsonb "fri_webhook_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tshirt_name"
   end
 
   create_table "recurrente_athletes", force: :cascade do |t|

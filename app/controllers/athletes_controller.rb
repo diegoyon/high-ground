@@ -72,7 +72,7 @@ class AthletesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def athlete_params
-      params.require(:athlete).permit(:first_name, :last_name, :email, :phone, :fri_username, :tshirt_size, :box, :division)
+      params.require(:athlete).permit(:first_name, :last_name, :email, :phone, :fri_username, :tshirt_size, :box, :division, :tshirt_name)
     end
 
     def request_payment

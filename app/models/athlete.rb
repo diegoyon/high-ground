@@ -7,4 +7,5 @@ class Athlete < ApplicationRecord
   validates :tshirt_size, presence: true
   validates :box, presence: true, length: { maximum: 50 }
   validates :division, presence: true
+  validates :tshirt_name, length: { maximum: 10 }
 end
