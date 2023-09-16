@@ -11,8 +11,6 @@ class WebhooksController < ApplicationController
       matching_athlete.save
       render json: { message: 'ok' }
     else
-      p '###########################'
-      p 'No matching athlete found'
       render json: { message: 'no matching athlete found' }
     end
   end
