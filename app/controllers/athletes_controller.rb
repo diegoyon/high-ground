@@ -96,7 +96,7 @@ class AthletesController < ApplicationController
           info: {},
           requestContent: {
             friUsername: @athlete.fri_username,
-            amount: "525",
+            amount: "650",
             reference: "high-ground-#{SecureRandom.hex(4)}",
           }
         }.to_json,
