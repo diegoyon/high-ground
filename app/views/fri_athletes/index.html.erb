@@ -5,10 +5,10 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Athletes</h1>
-    <%= link_to 'New athlete', new_athlete_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to 'New athlete', new_fri_athlete_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
   <div id="athletes" class="min-w-full">
-    <%= render @athletes %>
+    <%= render @fri_athletes %>
   </div>
 </div>

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :athletes, only: [:new, :create]
+  resources :fri_athletes, only: [:new, :create]
   resources :recurrente_athletes, only: [:new, :create]
   root "home#index"
   get "/success", to: "home#success"
