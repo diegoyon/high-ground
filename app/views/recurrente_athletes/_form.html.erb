@@ -1,8 +1,8 @@
-<%= form_with(model: recurrente_athlete, class: "contents") do |form| %>
-  <% if recurrente_athlete.errors.any? %>
+<%= form_with(model: athlete, url: recurrente_athletes_path, class: "contents") do |form| %>
+  <% if athlete.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <ul>
-        <% recurrente_athlete.errors.each do |error| %>
+        <% athlete.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>

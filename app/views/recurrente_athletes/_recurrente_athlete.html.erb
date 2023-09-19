@@ -1,27 +1,27 @@
-<div id="<%= dom_id recurrente_athlete %>">
+<div id="<%= dom_id athlete %>">
   <p class="my-5">
     <strong class="block font-medium mb-1">First name:</strong>
-    <%= recurrente_athlete.first_name %>
+    <%= athlete.first_name %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Last name:</strong>
-    <%= recurrente_athlete.last_name %>
+    <%= athlete.last_name %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Email:</strong>
-    <%= recurrente_athlete.email %>
+    <%= athlete.email %>
   </p>
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Phone:</strong>
-    <%= recurrente_athlete.phone %>
+    <%= athlete.phone %>
   </p>
 
   <% if action_name != "show" %>
-    <%= link_to "Show this recurrente_athlete", recurrente_athlete, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this recurrente_athlete', edit_recurrente_athlete_path(recurrente_athlete), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Show this athlete", athlete, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this athlete', edit_athlete_path(athlete), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>
 </div>

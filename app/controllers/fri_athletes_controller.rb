@@ -1,9 +1,9 @@
 class FriAthletesController < ApplicationController
-  before_action :set_fri_checkout, only: %i[ show edit update destroy ]
+  before_action :set_athlete, only: %i[ show edit update destroy ]
 
   # GET /athletes or /athletes.json
   def index
-    @fri_checkouts = FriAthlete.all
+    @athletes = Athlete.all
   end
 
   # GET /athletes/1 or /athletes/1.json
@@ -12,7 +12,7 @@ class FriAthletesController < ApplicationController
 
   # GET /athletes/new
   def new
-    @fri_checkout = FriAthlete.new
+    @athlete = Athlete.new
   end
 
   # GET /athletes/1/edit
@@ -21,17 +21,19 @@ class FriAthletesController < ApplicationController
 
   # POST /athletes or /athletes.json
   def create
-    @fri_checkout = FriAthlete.new(fri_checkout_params)
-    if @fri_checkout.valid?
+    @athlete = Athlete.new(athlete_params.except(:payment_attributes))
+    fri_checkout = FriCheckout.new(athlete_params[:payment_attributes][:paymentable_attributes])
+    @athlete.build_payment(paymentable: fri_checkout)
+    if @athlete.valid?
       api_data = request_payment
       if api_data['info']['type'] == 'success'
-        @fri_checkout.fri_request_payment_response = api_data['responseContent']
-        @fri_checkout.payment_status = api_data['responseContent']['transaction']['status']
-        @fri_checkout.transaction_id = api_data['responseContent']['transaction']['id']
-        @fri_checkout.save
+        @athlete.payment.paymentable.fri_request_payment_response = api_data['responseContent']
+        @athlete.payment.payment_status = api_data['responseContent']['transaction']['status']
+        @athlete.payment.paymentable.transaction_id = api_data['responseContent']['transaction']['id']
+        @athlete.save
         redirect_to success_path, notice: "Hemos recibido tus datos correctamente."
       elsif api_data['info']['type'] == 'error'
-        @fri_checkout.errors.add(:base, api_data['info']['message'])
+        @athlete.errors.add(:base, api_data['info']['message'])
         render :new, status: :unprocessable_entity
       else
         render :new, status: :unprocessable_entity
@@ -44,35 +46,36 @@ class FriAthletesController < ApplicationController
   # PATCH/PUT /athletes/1 or /athletes/1.json
   def update
     respond_to do |format|
-      if @fri_checkout.update(fri_checkout_params)
-        format.html { redirect_to fri_checkout_url(@fri_checkout), notice: "Athlete was successfully updated." }
-        format.json { render :show, status: :ok, location: @fri_checkout }
+      if @athlete.update(athlete_params)
+        format.html { redirect_to athlete_url(@athlete), notice: "Athlete was successfully updated." }
+        format.json { render :show, status: :ok, location: @athlete }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @fri_checkout.errors, status: :unprocessable_entity }
+        format.json { render json: @athlete.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /athletes/1 or /athletes/1.json
   def destroy
-    @fri_checkout.destroy
+    @athlete.destroy
 
     respond_to do |format|
-      format.html { redirect_to fri_checkouts_url, notice: "Athlete was successfully destroyed." }
+      format.html { redirect_to athletes_url, notice: "Athlete was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_fri_checkout
-      @fri_checkout = FriAthlete.find(params[:id])
+    def set_athlete
+      @athlete = Athlete.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
-    def fri_checkout_params
-      params.require(:fri_checkout).permit(:first_name, :last_name, :email, :phone, :fri_username, :tshirt_size, :box, :division, :tshirt_name)
+    def athlete_params
+      params.require(:athlete).permit(:first_name, :last_name, :email, :phone, :tshirt_size, :tshirt_name, :box, :division,
+        payment_attributes: [paymentable_attributes: [:fri_username]]
+      )
     end
 
     def request_payment
@@ -95,7 +98,7 @@ class FriAthletesController < ApplicationController
         body: {
           info: {},
           requestContent: {
-            friUsername: @fri_checkout.fri_username,
+            friUsername: @athlete.payment.paymentable.fri_username,
             amount: "650",
             reference: "high-ground-#{SecureRandom.hex(4)}",
           }

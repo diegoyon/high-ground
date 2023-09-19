@@ -1,8 +1,8 @@
-<%= form_with(model: fri_athlete, class: "contents") do |form| %>
-  <% if fri_athlete.errors.any? %>
+<%= form_with(model: athlete, url: fri_athletes_path, class: "contents") do |form| %>
+  <% if athlete.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <ul>
-        <% fri_athlete.errors.each do |error| %>
+        <% athlete.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -49,10 +49,15 @@
     <%= form.select :division, ['Scaled Femenino', 'Intermedio Femenino', 'Scaled Masculino', 'Intermedio Masculino', 'RX Masculino'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
-    <%= form.label "Usuario Fri que se utilizará para el pago" %>
-    <%= form.text_field :fri_username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
+  <%= form.fields_for :payment do |payment_form| %>
+
+    <%= payment_form.fields_for :paymentable do |paymentable_form| %>
+      <div class="my-5">
+        <%= paymentable_form.label "Usuario Fri que se utilizará para el pago" %>
+        <%= paymentable_form.text_field :fri_username, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      </div>
+    <% end %>
+  <% end %>
 
   <div class="lg:hidden">
     <%= render "shared/fri_total_price" %>
