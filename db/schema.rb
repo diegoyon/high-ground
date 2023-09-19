@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_144720) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -51,7 +51,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144720) do
     t.string "fri_username"
     t.integer "transaction_id"
     t.jsonb "fri_request_payment_response"
-    t.jsonb "fri_transaction_status_response"
     t.jsonb "fri_webhook_response"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -63,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144720) do
     t.bigint "paymentable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "athlete_id", null: false
+    t.index ["athlete_id"], name: "index_payments_on_athlete_id"
     t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
   end
 
@@ -86,4 +87,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_144720) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "payments", "athletes"
 end
