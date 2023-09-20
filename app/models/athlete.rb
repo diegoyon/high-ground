@@ -13,4 +13,6 @@ class Athlete < ApplicationRecord
   validates :tshirt_name, length: { maximum: 10 }
 
   delegate :payment_status, to: :payment, allow_nil: true
+
+  scope :ready, -> { joins(:payment).where(payments: { payment_status: 'completed' }) }
 end
