@@ -13,6 +13,7 @@ class FriAthletesController < ApplicationController
   # GET /athletes/new
   def new
     @athlete = Athlete.new
+    @athlete.build_payment(paymentable: FriCheckout.new)
   end
 
   # GET /athletes/1/edit
