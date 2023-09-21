@@ -1,5 +1,7 @@
 class Athlete < ApplicationRecord
-  has_one :payment
+  has_one :payment, dependent: :destroy
+  has_one :fri_checkout, through: :payment, source: :paymentable, source_type: 'FriCheckout'
+  has_one :recurrente_checkout, through: :payment, source: :paymentable, source_type: 'RecurrenteCheckout'
 
   accepts_nested_attributes_for :payment
 
@@ -15,4 +17,12 @@ class Athlete < ApplicationRecord
   delegate :payment_status, to: :payment, allow_nil: true
 
   scope :ready, -> { joins(:payment).where(payments: { payment_status: 'completed' }) }
+
+  before_destroy :destroy_checkout
+
+  private
+
+  def destroy_checkout
+    payment&.paymentable&.destroy if payment
+  end
 end
