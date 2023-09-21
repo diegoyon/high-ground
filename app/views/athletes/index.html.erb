@@ -1,0 +1,24 @@
+<section class="container mx-auto">
+  Athletes
+  <div class="grid border border-black grid-cols-<%= @workouts.count + 4 %>">
+      <div class="p-2">Athlete</div>
+      <div class="p-2">Total</div>
+      <div class="p-2">Workout 1</div>
+      <div class="p-2">Workout 2</div>
+      <% @athletes.each do |athlete| %>
+        <div class="flex flex-col p-2">
+          <div class="uppercase font-semibold"><%= "#{athlete.first_name} #{athlete.last_name}" %></div>
+          <div class="uppercase text-gray-500 text-sm"><%= athlete.box %></div>
+        </div>
+        <div class="p-2">
+          <div class=""><%= athlete.last_name %></div>
+        </div>
+        <div class="p-2">
+          <div class=""><%= athlete.box %></div>
+        </div>
+        <div class="p-2">
+          <div class=""><%= athlete.division %></div>
+        </div>
+      <% end %>
+  </div>
+</section>
