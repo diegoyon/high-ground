@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_21_205517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,5 +87,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.bigint "workout_id", null: false
+    t.jsonb "score_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["athlete_id"], name: "index_scores_on_athlete_id"
+    t.index ["workout_id"], name: "index_scores_on_workout_id"
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "type"
+    t.bigint "athlete_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "score_id", null: false
+    t.index ["athlete_id"], name: "index_workouts_on_athlete_id"
+    t.index ["score_id"], name: "index_workouts_on_score_id"
+  end
+
   add_foreign_key "payments", "athletes"
+  add_foreign_key "scores", "athletes"
+  add_foreign_key "scores", "workouts"
+  add_foreign_key "workouts", "athletes"
+  add_foreign_key "workouts", "scores"
 end

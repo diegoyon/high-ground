@@ -1,5 +1,7 @@
 class Athlete < ApplicationRecord
   has_one :payment, dependent: :destroy
+  has_and_belongs_to_many :workouts
+  has_many :scores, dependent: :destroy
 
   # For future associations if needed
   # has_one :fri_checkout, through: :payment, source: :paymentable, source_type: 'FriCheckout'

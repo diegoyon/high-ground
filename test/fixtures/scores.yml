@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  athlete: one
+  workout: one
+  score_data: 
+
+two:
+  athlete: two
+  workout: two
+  score_data: 
