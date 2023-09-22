@@ -1,6 +1,5 @@
 class Athlete < ApplicationRecord
   has_one :payment, dependent: :destroy
-  has_and_belongs_to_many :workouts
   has_many :scores, dependent: :destroy
 
   # For future associations if needed
@@ -23,9 +22,9 @@ class Athlete < ApplicationRecord
   scope :ready, -> { joins(:payment).where(payments: { payment_status: 'completed' }) }
 
   before_destroy :destroy_checkout
-
+  
   private
-
+  
   def destroy_checkout
     payment&.paymentable&.destroy if payment
   end

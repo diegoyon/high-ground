@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_21_205517) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_043432) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -38,7 +38,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_205517) do
     t.string "division"
     t.string "payment_status"
     t.integer "transaction_id"
-    t.string "reference"
     t.jsonb "fri_request_payment_response"
     t.jsonb "fri_transaction_status_response"
     t.jsonb "fri_webhook_response"
@@ -100,18 +99,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_21_205517) do
   create_table "workouts", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "type"
-    t.bigint "athlete_id", null: false
+    t.string "workout_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "score_id", null: false
-    t.index ["athlete_id"], name: "index_workouts_on_athlete_id"
-    t.index ["score_id"], name: "index_workouts_on_score_id"
   end
 
   add_foreign_key "payments", "athletes"
   add_foreign_key "scores", "athletes"
   add_foreign_key "scores", "workouts"
-  add_foreign_key "workouts", "athletes"
-  add_foreign_key "workouts", "scores"
 end
