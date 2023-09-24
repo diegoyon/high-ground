@@ -22,6 +22,10 @@ class Athlete < ApplicationRecord
   scope :ready, -> { joins(:payment).where(payments: { payment_status: 'completed' }) }
 
   before_destroy :destroy_checkout
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
   
   private
   

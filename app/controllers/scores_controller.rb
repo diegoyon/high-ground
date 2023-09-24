@@ -27,7 +27,7 @@ class ScoresController < ApplicationController
 
     respond_to do |format|
       if @score.save
-        format.html { redirect_to score_url(@score), notice: "Score was successfully created." }
+        format.html { redirect_to leaderboard_index_path, notice: "Score was successfully created." }
         format.json { render :show, status: :created, location: @score }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class ScoresController < ApplicationController
   def update
     respond_to do |format|
       if @score.update(score_params)
-        format.html { redirect_to score_url(@score), notice: "Score was successfully updated." }
+        format.html { redirect_to leaderboard_index_path, notice: "Score was successfully updated." }
         format.json { render :show, status: :ok, location: @score }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class ScoresController < ApplicationController
     @score.destroy
 
     respond_to do |format|
-      format.html { redirect_to scores_url, notice: "Score was successfully destroyed." }
+      format.html { redirect_to leaderboard_index_path, notice: "Score was successfully destroyed." }
       format.json { head :no_content }
     end
   end
