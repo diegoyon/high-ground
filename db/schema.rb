@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_22_043432) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_053244) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -90,9 +90,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_043432) do
   create_table "scores", force: :cascade do |t|
     t.bigint "athlete_id", null: false
     t.bigint "workout_id", null: false
-    t.jsonb "score_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "main_score"
+    t.string "tiebreak_score"
     t.index ["athlete_id"], name: "index_scores_on_athlete_id"
     t.index ["workout_id"], name: "index_scores_on_workout_id"
   end
@@ -103,6 +104,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_22_043432) do
     t.string "workout_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tiebreak_type"
   end
 
   add_foreign_key "payments", "athletes"

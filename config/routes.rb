@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :athletes, only: [:index]
   resources :leaderboard, only: [:index]
   resources :workouts
+  resources :scores
 
   root "home#index"
 

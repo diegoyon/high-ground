@@ -13,6 +13,8 @@ class ScoresController < ApplicationController
   # GET /scores/new
   def new
     @score = Score.new
+    @score.athlete = Athlete.find(params[:athlete_id])
+    @score.workout = Workout.find(params[:workout_id])
   end
 
   # GET /scores/1/edit
@@ -65,6 +67,6 @@ class ScoresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def score_params
-      params.fetch(:score, {})
+      params.require(:score).permit(:main_score, :tiebreak_score, :athlete_id, :workout_id)
     end
 end

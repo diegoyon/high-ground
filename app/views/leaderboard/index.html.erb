@@ -1,24 +1,27 @@
 <section class="container mx-auto">
   Leaderboard
-  <div class="grid border border-black grid-cols-<%= @workouts.count + 4 %>">
-      <div class="p-2">Athlete</div>
-      <div class="p-2">Total</div>
-      <div class="p-2">Workout 1</div>
-      <div class="p-2">Workout 2</div>
-      <% @athletes.each do |athlete| %>
-        <div class="flex flex-col p-2">
-          <div class="uppercase font-semibold"><%= "#{athlete.first_name} #{athlete.last_name}" %></div>
-          <div class="uppercase text-gray-500 text-sm"><%= athlete.box %></div>
-        </div>
-        <div class="p-2">
-          <div class=""><%= athlete.last_name %></div>
-        </div>
-        <div class="p-2">
-          <div class=""><%= athlete.box %></div>
-        </div>
-        <div class="p-2">
-          <div class=""><%= athlete.division %></div>
+  <div class="grid border border-black grid-cols-<%= @workouts.count + 2 %>">
+    <div class="p-2">Athlete</div>
+    <div class="p-2">Total</div>
+    <% @workouts.each_with_index do |workout, index| %>
+      <div>
+        <div class="p-2">Workout <%= index + 1 %></div>
+        <div class="p-2"><%= workout.name %></div>
+      </div>
+    <% end %>
+    <% @athletes.each do |athlete| %>
+      <div class="flex flex-col p-2">
+        <div class="uppercase font-semibold"><%= "#{athlete.first_name} #{athlete.last_name}" %></div>
+        <div class="uppercase text-gray-500 text-sm"><%= athlete.box %></div>
+      </div>
+      <div class="">0</div> <!-- Total placeholder -->
+      <% @workouts.each do |workout| %>
+        <% score = athlete&.scores&.find_by(workout_id: workout.id) %>
+        <div>
+          <div><%= score&.main_score || "" %></div>
+          <%= link_to 'New score', new_score_path(athlete_id: athlete.id, workout_id: workout.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium w-fit" %>
         </div>
       <% end %>
+    <% end %>
   </div>
 </section>
