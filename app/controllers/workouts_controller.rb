@@ -3,7 +3,7 @@ class WorkoutsController < ApplicationController
 
   # GET /workouts or /workouts.json
   def index
-    @workouts = Workout.all
+    @workouts = Workout.order(:workout_number)
   end
 
   # GET /workouts/1 or /workouts/1.json
@@ -65,6 +65,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:name, :description, :workout_type)
+      params.require(:workout).permit(:name, :description, :workout_type, :workout_number, :tiebreak_type)
     end
 end

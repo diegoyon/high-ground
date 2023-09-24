@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_24_053244) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_24_230120) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -92,8 +92,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_053244) do
     t.bigint "workout_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "main_score"
-    t.string "tiebreak_score"
+    t.integer "points"
+    t.integer "rank"
+    t.integer "main_score"
+    t.integer "tiebreak_score"
     t.index ["athlete_id"], name: "index_scores_on_athlete_id"
     t.index ["workout_id"], name: "index_scores_on_workout_id"
   end
@@ -105,6 +107,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_24_053244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tiebreak_type"
+    t.integer "workout_number"
   end
 
   add_foreign_key "payments", "athletes"
