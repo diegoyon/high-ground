@@ -1,6 +1,7 @@
 <section class="container mx-auto">
   Leaderboard
-  <div class="grid border border-black grid-cols-5">
+  <div class="grid border border-black grid-cols-6">
+    <div class="p-2">Rank</div>
     <div class="p-2">Athlete</div>
     <div class="p-2">Total</div>
     <% @workouts.each_with_index do |workout, index| %>
@@ -10,11 +11,12 @@
       </div>
     <% end %>
     <% @athletes.each do |athlete| %>
+      <div class="p-2"><%= athlete&.rank || 0 %></div>
       <div class="flex flex-col p-2">
         <div class="uppercase font-semibold"><%= athlete.full_name %></div>
         <div class="uppercase text-gray-500 text-sm"><%= athlete.box %></div>
       </div>
-      <div class="">0</div> <!-- Total placeholder -->
+      <div class=""><%= athlete&.total_points %></div>
       <% @workouts.each do |workout| %>
         <% score = athlete&.scores&.find_by(workout_id: workout.id) %>
         <div class="flex justify-between px-5 items-center">

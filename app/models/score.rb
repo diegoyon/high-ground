@@ -6,8 +6,21 @@ class Score < ApplicationRecord
 
   delegate :workout_type, to: :workout
 
-  after_save :calculate_points_and_update_rank
-  after_destroy :calculate_points_and_update_rank
+  after_save :handle_score_changes
+  after_destroy :handle_score_changes
+
+  def handle_score_changes
+    calculate_points_and_update_rank
+    update_athlete_points_and_rank
+  end
+
+  def update_athlete_points_and_rank #falta desempatar por event wins
+    athlete.update_columns(total_points: athlete.scores.sum(:points))
+    athletes = Athlete.all.order(total_points: :desc)
+    athletes.each_with_index do |athlete, index|
+      athlete.update_columns(rank: index + 1)
+    end
+  end
 
   def calculate_points_and_update_rank
     scores = Score.where(workout_id: workout_id).order(main_score_order, tiebreak_score_order)
