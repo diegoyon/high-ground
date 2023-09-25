@@ -24,6 +24,12 @@ class ScoresController < ApplicationController
   # POST /scores or /scores.json
   def create
     @score = Score.new(score_params)
+    if @score.workout_type == "For time"
+      modified_score_params = score_params.dup
+      minutes, seconds = modified_score_params[:main_score].split(":")
+      modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+      @score = Score.new(modified_score_params)
+    end
 
     respond_to do |format|
       if @score.save

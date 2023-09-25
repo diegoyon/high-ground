@@ -4,6 +4,8 @@ class Score < ApplicationRecord
 
   validates :athlete_id, uniqueness: { scope: :workout_id }
 
+  delegate :workout_type, to: :workout
+
   after_save :calculate_points_and_update_rank
   after_destroy :calculate_points_and_update_rank
 

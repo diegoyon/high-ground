@@ -27,7 +27,11 @@
                 <%= score.rank %>
               </div>
               <div>
-                <%= score.main_score %>
+                <% if score.workout_type == "For time" %>
+                  <%= format_time(score.main_score) %>
+                <% else %>
+                  <%= score.main_score %>
+                <% end %>
               </div>
             </div>
             <div class="flex gap-4">
