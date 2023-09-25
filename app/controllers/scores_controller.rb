@@ -44,14 +44,17 @@ class ScoresController < ApplicationController
 
   # PATCH/PUT /scores/1 or /scores/1.json
   def update
-    respond_to do |format|
-      if @score.update(score_params)
-        format.html { redirect_to leaderboard_index_path, notice: "Score was successfully updated." }
-        format.json { render :show, status: :ok, location: @score }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @score.errors, status: :unprocessable_entity }
-      end
+    modified_score_params = score_params.dup
+
+    if @score.workout_type == "For time"
+      minutes, seconds = modified_score_params[:main_score].split(":")
+      modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+    end
+  
+    if @score.update(modified_score_params)
+      redirect_to leaderboard_index_path, notice: "Score was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
