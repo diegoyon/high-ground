@@ -11,14 +11,28 @@ class Score < ApplicationRecord
 
   def handle_score_changes
     calculate_points_and_update_rank
-    update_athlete_points_and_rank
+    update_athletes_total_points
+    update_athletes_rank
   end
 
-  def update_athlete_points_and_rank #falta desempatar por event wins
-    athlete.update_columns(total_points: athlete.scores.sum(:points))
-    athletes = Athlete.all.order(total_points: :desc)
+  def update_athletes_total_points
+    athletes = Athlete.ready
+    athletes.each do |athlete|
+      athlete.update_columns(total_points: athlete.scores.sum(:points))
+    end
+  end
+
+  def update_athletes_rank #falta desempatar por event wins
+    athletes = Athlete.ready.order(total_points: :desc)
+    rank = 0
+    last_total_points = nil
+
     athletes.each_with_index do |athlete, index|
-      athlete.update_columns(rank: index + 1)
+      if athlete.total_points != last_total_points
+        rank = index + 1
+      end
+      athlete.update_columns(rank: rank)
+      last_total_points = athlete.total_points
     end
   end
 
@@ -90,7 +104,7 @@ class Score < ApplicationRecord
   def main_score_order
     if workout.workout_type == "For time"
       "main_score ASC"
-    elsif workout.workout_type == "AMRAP"
+    else
       "main_score DESC"
     end
   end
@@ -98,7 +112,7 @@ class Score < ApplicationRecord
   def tiebreak_score_order
     if workout.workout_type == "For time"
       "tiebreak_score ASC"
-    elsif workout.workout_type == "AMRAP"
+    else
       "tiebreak_score DESC"
     end
   end
