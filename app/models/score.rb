@@ -108,7 +108,7 @@ class Score < ApplicationRecord
   end
 
   def main_score_order
-    if workout.workout_type == "Time"
+    if workout_type == "Time"
       "main_score ASC"
     else
       "main_score DESC"
@@ -116,7 +116,7 @@ class Score < ApplicationRecord
   end
 
   def tiebreak_score_order
-    if workout.workout_type == "Time"
+    if tiebreak_type == "Time"
       "tiebreak_score ASC"
     else
       "tiebreak_score DESC"
