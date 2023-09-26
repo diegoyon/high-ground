@@ -10,4 +10,17 @@ module LeaderboardHelper
     seconds = seconds % 60
     formatted_time = format('%02d:%02d', minutes, seconds)
   end
+
+  def format_score(score, measurement_type)
+    case measurement_type
+    when "AMRAP"
+      "#{score} reps"
+    when "Weight"
+      "#{score} lbs"
+    when "Time"
+      format_time(score)
+    else
+      ""
+    end
+  end
 end

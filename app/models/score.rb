@@ -3,11 +3,19 @@ class Score < ApplicationRecord
   belongs_to :workout
 
   validates :athlete_id, uniqueness: { scope: :workout_id }
+  validates :main_score, presence: true
+  validates :tiebreak_score, presence: true, if: :has_tiebreak?
 
-  delegate :workout_type, to: :workout
+  delegate :workout_type, :tiebreak_type, to: :workout
 
   after_save :handle_score_changes
   after_destroy :handle_score_changes
+
+  def has_tiebreak?
+    tiebreak_type != "None"
+  end
+
+  private
 
   def handle_score_changes
     calculate_points_and_update_rank
@@ -99,10 +107,8 @@ class Score < ApplicationRecord
     end
   end
 
-  private
-
   def main_score_order
-    if workout.workout_type == "For time"
+    if workout.workout_type == "Time"
       "main_score ASC"
     else
       "main_score DESC"
@@ -110,7 +116,7 @@ class Score < ApplicationRecord
   end
 
   def tiebreak_score_order
-    if workout.workout_type == "For time"
+    if workout.workout_type == "Time"
       "tiebreak_score ASC"
     else
       "tiebreak_score DESC"

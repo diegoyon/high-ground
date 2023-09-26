@@ -11,34 +11,20 @@
     </div>
   <% end %>
 
-  <% if score.workout.workout_type == 'For time' %>
+  <div class="my-5">
+    <%= form.label "Score" %>
+    <%= form.text_field :main_score, placeholder: score_placeholder(score.workout_type), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <% if score.has_tiebreak? %>
     <div class="my-5">
-      <%= form.label "Score" %>
-      <%= form.text_field :main_score, placeholder: "MM:ss", class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-    </div>
-  <% else %>
-    <div class="my-5">
-      <%= form.label "Score" %>
-      <%= form.number_field :main_score, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+      <%= form.label "Tiebreak" %>
+      <%= form.text_field :tiebreak_score, placeholder: score_placeholder(score.tiebreak_type), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
   <% end %>
 
-
-  <div class="my-5">
-    <%= form.label "Tiebreak" %>
-    <%= form.text_field :tiebreak_score, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label "Athlete" %>
-    <%= form.number_field :athlete_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label "Workout" %>
-    <%= form.number_field :workout_id, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
+  <%= form.hidden_field :athlete_id %>
+  <%= form.hidden_field :workout_id %>
 
   <div class="inline">
     <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>

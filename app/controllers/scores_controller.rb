@@ -24,10 +24,18 @@ class ScoresController < ApplicationController
   # POST /scores or /scores.json
   def create
     @score = Score.new(score_params)
-    if @score.workout_type == "For time"
+
+    if @score.workout_type == "Time"
       modified_score_params = score_params.dup
       minutes, seconds = modified_score_params[:main_score].split(":")
       modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+      @score = Score.new(modified_score_params)
+    end
+
+    if @score.has_tiebreak? && @score.tiebreak_type == "Time"
+      modified_score_params = modified_score_params.dup || score_params.dup
+      minutes, seconds = modified_score_params[:tiebreak_score].split(":")
+      modified_score_params[:tiebreak_score] = minutes.to_i * 60 + seconds.to_i
       @score = Score.new(modified_score_params)
     end
 
@@ -46,9 +54,14 @@ class ScoresController < ApplicationController
   def update
     modified_score_params = score_params.dup
 
-    if @score.workout_type == "For time"
+    if @score.workout_type == "Time"
       minutes, seconds = modified_score_params[:main_score].split(":")
       modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+    end
+
+    if @score.has_tiebreak? && @score.tiebreak_type == "Time"
+        minutes, seconds = modified_score_params[:tiebreak_score].split(":")
+        modified_score_params[:tiebreak_score] = minutes.to_i * 60 + seconds.to_i
     end
   
     if @score.update(modified_score_params)

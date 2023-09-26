@@ -29,12 +29,13 @@
                 <%= score.rank %>
               </div>
               <div>
-                <% if score.workout_type == "For time" %>
-                  <%= format_time(score.main_score) %>
-                <% else %>
-                  <%= score.main_score %>
-                <% end %>
+                <%= format_score(score.main_score, score.workout_type) %>
               </div>
+              <% if score.has_tiebreak? %>
+                <div>
+                  <%= format_score(score.tiebreak_score, score.tiebreak_type) %>
+                </div>
+              <% end %>
             </div>
             <div class="flex gap-4">
               <%= link_to edit_score_path(score) do %>

@@ -23,7 +23,7 @@
 
   <div class="my-5">
     <%= form.label "Tipo de workout" %>
-    <%= form.select :workout_type, ['For time', 'AMRAP', 'Weight'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -33,7 +33,7 @@
 
   <div class="my-5">
     <%= form.label "Tipo de tiebreak" %>
-    <%= form.select :tiebreak_type, ['No tiebreak', 'For time', 'AMRAP', 'Weight'], class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :tiebreak_type, ['None', 'Time', 'AMRAP', 'Weight'], class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
