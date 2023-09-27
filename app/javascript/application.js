@@ -5,5 +5,5 @@ import "controllers"
 // function to add event listener to the form to submit when page is loaded
 document.addEventListener('turbo:load', () => {
   const form = document.querySelector('form[data-controller="actions"]')
-  form.requestSubmit()
+  form?.requestSubmit()
 })

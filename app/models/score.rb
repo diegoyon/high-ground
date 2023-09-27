@@ -24,14 +24,14 @@ class Score < ApplicationRecord
   end
 
   def update_athletes_total_points
-    athletes = Athlete.ready
+    athletes = Athlete.ready.where(division: athlete.division)
     athletes.each do |athlete|
       athlete.update_columns(total_points: athlete.scores.sum(:points))
     end
   end
 
   def update_athletes_rank #falta desempatar por event wins
-    athletes = Athlete.ready.order(total_points: :desc)
+    athletes = Athlete.ready.where(division: athlete.division).order(total_points: :desc)
     rank = 0
     last_total_points = nil
 
@@ -45,7 +45,7 @@ class Score < ApplicationRecord
   end
 
   def calculate_points_and_update_rank
-    scores = Score.where(workout_id: workout_id).order(main_score_order, tiebreak_score_order)
+    scores = Score.joins(:athlete).where(athletes: { division: athlete.division }).where(workout_id: workout_id).order(main_score_order, tiebreak_score_order)
     rank = 0
     last_main_score = nil
     last_tiebreak_score = nil
