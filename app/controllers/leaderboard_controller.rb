@@ -10,7 +10,7 @@ class LeaderboardController < ApplicationController
 
   def search_athletes
     return unless params[:query].present?
-    @athletes = @athletes.where('lower(first_name) LIKE :query', query: "%#{params[:query].downcase}%")
+    @athletes = @athletes.where('lower(first_name || \' \' || last_name) LIKE :query', query: "%#{params[:query].downcase}%")
   end
 
   def filter_athletes
