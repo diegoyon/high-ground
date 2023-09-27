@@ -14,7 +14,10 @@ class LeaderboardController < ApplicationController
   end
 
   def filter_athletes
-    return unless params[:division].present?
-    @athletes = @athletes.where('division = ?', params[:division])
+    if params[:division].present?
+      @athletes = @athletes.where(division: params[:division])
+    else
+      @athletes = @athletes.where(division: "Scaled Femenino") #default
+    end
   end
 end
