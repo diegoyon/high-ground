@@ -23,6 +23,12 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
 
+    if workout_params[:time_cap].present?
+      modified_workout_params = workout_params.dup
+      minutes, seconds = modified_workout_params[:time_cap].split(":")
+      @workout = Workout.new(modified_workout_params)
+    end
+
     respond_to do |format|
       if @workout.save
         format.html { redirect_to workout_url(@workout), notice: "Workout was successfully created." }
@@ -36,8 +42,15 @@ class WorkoutsController < ApplicationController
 
   # PATCH/PUT /workouts/1 or /workouts/1.json
   def update
+    modified_workout_params = workout_params.dup
+    
+    if modified_workout_params[:time_cap].present?
+      minutes, seconds = modified_workout_params[:time_cap].split(":")
+      modified_workout_params[:time_cap] = minutes.to_i * 60 + seconds.to_i
+    end
+
     respond_to do |format|
-      if @workout.update(workout_params)
+      if @workout.update(modified_workout_params)
         format.html { redirect_to workout_url(@workout), notice: "Workout was successfully updated." }
         format.json { render :show, status: :ok, location: @workout }
       else
@@ -65,6 +78,6 @@ class WorkoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workout_params
-      params.require(:workout).permit(:name, :description, :workout_type, :workout_number, :tiebreak_type)
+      params.require(:workout).permit(:name, :description, :workout_type, :workout_number, :tiebreak_type, :time_cap)
     end
 end
