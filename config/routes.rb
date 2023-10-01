@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :fri_athletes, only: [:new, :create]
   resources :recurrente_athletes, only: [:new, :create]
-  resources :athletes, only: [:index]
   resources :leaderboard, only: [:index]
   resources :workouts
   resources :scores
@@ -15,4 +15,8 @@ Rails.application.routes.draw do
 
   post "webhooks/fri", to: "webhooks#fri"
   post "webhooks/recurrente", to: "webhooks#recurrente"
+
+  namespace :admin do
+    resources :leaderboard, only: [:index]
+  end
 end
