@@ -38,7 +38,7 @@
 
   <div class="my-5">
     <%= form.label "Timecap" %>
-    <%= form.text_field :time_cap, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :time_cap, value: format_time(workout.time_cap), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">
