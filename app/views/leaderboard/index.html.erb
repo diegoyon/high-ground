@@ -1,14 +1,22 @@
 <section class="container mx-auto">
   Leaderboard
   <% @athletes.each do |athlete| %>
-    <div>
-      <button data-controller="leaderboard" data-action="click->leaderboard#toggle" id="athlete_<%= athlete.id %>">
-        <%= athlete.full_name %>
-      </button>
-    </div>
-    <div id="athlete_<%= athlete.id %>_details" class="max-h-0 overflow-hidden transition-all ease-in-out duration-300">
-      Division: <%= athlete.division %><br>
-      Box: <%= athlete.box %>
+    <div class="flex flex-col md:flex-row md:hidden">
+      <div data-controller="leaderboard" data-action="click->leaderboard#toggle" id="athlete_<%= athlete.id %>" class="gap-4 px-4 h-16 items-center border border-black cursor-pointer flex justify-between"> 
+        <p class="text-sm leading-none font-semibold"><%= athlete.rank %></p>
+        <p class="uppercase flex-1 text-sm leading-none font-semibold"><%= athlete.full_name %></p>
+
+        <p class="text-sm leading-none font-semibold"><%= athlete.total_points %></p>
+        <i class="fa-solid fa-chevron-down"></i>
+
+      </div>
+      <div id="athlete_<%= athlete.id %>_details" class="max-h-0 overflow-hidden transition-all ease-in-out duration-300 flex flex-col px-4">
+        <% athlete.scores.each do |score| %>
+          <p class="text-sm leading-loose">
+            <%= score.workout.name %>: <%= format_rank(score.rank) %> (<%= format_score(score.main_score, score.workout_type) %>) <%= score.points %> pts
+          </p>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </section>

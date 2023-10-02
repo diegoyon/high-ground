@@ -15,4 +15,18 @@ module LeaderboardHelper
       ""
     end
   end
+
+  def format_rank(rank)
+    case rank
+    when 1
+      "1st"
+    when 2
+      "2nd"
+    when 3
+      "3rd"
+    else
+      "#{rank}th"
+    end
+  end
+
 end

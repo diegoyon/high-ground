@@ -37,12 +37,12 @@ export default class extends Controller {
   }
 
   show(athleteDetails) {
-    athleteDetails.classList.add('max-h-40')
+    athleteDetails.classList.add('max-h-96')
     athleteDetails.classList.remove('max-h-0')
   }
 
   hide(athleteDetails) {
     athleteDetails.classList.add('max-h-0')
-    athleteDetails.classList.remove('max-h-40')
+    athleteDetails.classList.remove('max-h-96')
   }
 }
