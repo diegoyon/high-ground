@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :workouts
   resources :scores
 
+  resources :athletes, only: [:index, :show]
+
   root "home#index"
 
   get "/success", to: "home#success"

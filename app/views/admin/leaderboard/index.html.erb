@@ -1,6 +1,6 @@
 <section class="container mx-auto">
   Admin Leaderboard
-  
+  <%= link_to "Log Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "rounded p-3 bg-red-500 text-white font-medium w-fit h-fit mx-auto" %>
   <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' } do |form| %>
     <%= form.text_field :query, data: { action: 'input->actions#submit' }, type: "search", placeholder: "Start typing to search..." %>
     <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' } %>
