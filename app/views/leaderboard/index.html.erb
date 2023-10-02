@@ -1,8 +1,14 @@
 <section class="">
-  <h1>Leaderboard</h1>
-  <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' } do |form| %>
-    <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' } %>
-  <% end %>
+  <div class="bg-[url('leaderboard_hero.png')] h-80 bg-cover flex flex-col items-start justify-around px-5">
+    <div></div>
+    <div>
+      <h2 class="uppercase text-white font-bold text-[10px]">2023 High Ground Fitness Competition</h2>
+      <h1 class="uppercase text-white font-semibold text-[40px]">Leaderboard</h1>
+    </div>
+    <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' }, class: 'w-full' do |form| %>
+      <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' }, class: 'w-full bg-black text-white border-white' %>
+    <% end %>
+  </div>
   <turbo-frame id="leaderboard-frame" target="_top">
     <% @athletes.each do |athlete| %>
       <div class="flex flex-col md:flex-row md:hidden border-t-2 border-gray-300">
