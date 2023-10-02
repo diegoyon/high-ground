@@ -1,17 +1,19 @@
-<section class="">
-  <div class="bg-[url('leaderboard_hero.png')] h-80 bg-cover flex flex-col items-start justify-around px-5">
-    <div></div>
+<section>
+  <div class="bg-[url('leaderboard_hero.png')] h-80 bg-cover flex flex-col items-start justify-around px-5 pt-24 md:h-[30rem]">
     <div>
-      <h2 class="uppercase text-white font-bold text-[10px]">2023 High Ground Fitness Competition</h2>
-      <h1 class="uppercase text-white font-semibold text-[40px]">Leaderboard</h1>
+      <h2 class="uppercase text-white font-bold text-[10px] md:text-lg">2023 High Ground Fitness Competition</h2>
+      <h1 class="uppercase text-white font-semibold text-[40px] md:text-8xl">Leaderboard</h1>
     </div>
-    <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' }, class: 'w-full' do |form| %>
+    <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' }, class: 'w-full md:w-1/3' do |form| %>
       <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' }, class: 'w-full bg-black text-white border-white' %>
     <% end %>
   </div>
+
   <turbo-frame id="leaderboard-frame" target="_top">
+
+    <!-- Mobile Version -->
     <% @athletes.each do |athlete| %>
-      <div class="flex flex-col md:flex-row md:hidden border-t-2 border-gray-300">
+      <div class="flex flex-col md:flex-row border-t-2 border-gray-300 md:hidden">
         <div data-controller="leaderboard" data-action="click->leaderboard#toggle" id="athlete_<%= athlete.id %>" class="gap-4 px-4 h-16 items-center cursor-pointer flex justify-between"> 
           <p class="text-sm leading-none font-semibold"><%= athlete.rank %></p>
           <p class="uppercase flex-1 text-sm leading-none font-semibold"><%= athlete.full_name %></p>
@@ -34,5 +36,33 @@
         </div>
       </div>
     <% end %>
+
+    <!-- Desktop Version -->
+    <div class="hidden md:grid grid-cols-6">
+      <div>Rank</div>
+      <div>Athlete</div>
+      <div>Points</div>
+      <% @workouts.each_with_index do |workout, index| %>
+        <div>Workout <%= index + 1 %></div>
+      <% end %>
+      <% @athletes.each do |athlete| %>
+        <div class="text-sm leading-none font-semibold"><%= athlete.rank %></div>
+        <div class="uppercase flex-1 text-sm leading-none font-semibold"><%= athlete.full_name %></div>
+        <div class="text-sm leading-none font-semibold"><%= athlete.total_points %></div>
+
+        <% @workouts.each do |workout| %>
+          <% score = athlete&.scores&.find_by(workout_id: workout.id) %>
+          <% if score %>
+            <div>
+              <div><%= format_rank(score&.rank) %></div>
+              <div>(<%= format_score(score&.main_score, score&.workout_type) %>)</div>
+              <div><%= score&.points %>pts</div>
+            </div>
+            <% else %>
+            <div>-</div>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
   </turbo-frame>
 </section>
