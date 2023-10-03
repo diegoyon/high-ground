@@ -1,12 +1,14 @@
 <section>
-  <div class="bg-[url('leaderboard_hero.png')] h-80 bg-cover flex flex-col items-start justify-around px-5 pt-24 md:h-[30rem]">
-    <div>
-      <h2 class="uppercase text-white font-bold text-[10px] md:text-lg">2023 High Ground Fitness Competition</h2>
-      <h1 class="uppercase text-white font-semibold text-[40px] md:text-8xl">Leaderboard</h1>
+  <div class="bg-[url('leaderboard_hero.png')] h-80 bg-cover md:h-[30rem]">
+    <div class="flex flex-col items-start justify-around px-5 pt-24 h-full md:container md:mx-auto">
+      <div>
+        <h2 class="uppercase text-white font-bold text-[10px] md:text-lg">2023 High Ground Fitness Competition</h2>
+        <h1 class="uppercase text-white font-semibold text-[40px] md:text-8xl">Leaderboard</h1>
+      </div>
+      <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' }, class: 'w-full md:w-1/3' do |form| %>
+        <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' }, class: 'w-full bg-black text-white border-white' %>
+      <% end %>
     </div>
-    <%= form_with url: "/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'leaderboard-frame' }, class: 'w-full md:w-1/3' do |form| %>
-      <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' }, class: 'w-full bg-black text-white border-white' %>
-    <% end %>
   </div>
 
   <turbo-frame id="leaderboard-frame" target="_top">
@@ -38,7 +40,7 @@
     <% end %>
 
     <!-- Desktop Version -->
-    <div class="hidden container mx-auto md:grid grid-cols-[100px_250px_100px_repeat(3,_minmax(100px,_1fr))] my-8 border border-gray-200">
+    <div class="hidden container mx-auto md:grid grid-cols-[1fr_4fr_1fr_repeat(<%= @workouts.count %>,_2fr)] my-8 border border-gray-200">
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Rank</div>
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Athlete</div>
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Points</div>
@@ -46,20 +48,20 @@
         <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Workout <%= index + 1 %></div>
       <% end %>
       <% @athletes.each_with_index do |athlete, index| %>
-        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center justify-center"><%= athlete.rank %></div>
-        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center justify-start uppercase"><%= athlete.full_name %></div>
-        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center justify-center"><%= athlete.total_points %></div>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= athlete.rank %></div>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center border border-gray-200 justify-start uppercase px-4"><%= athlete.full_name %></div>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center border border-gray-200 justify-center"><%= athlete.total_points %></div>
 
         <% @workouts.each do |workout| %>
           <% score = athlete&.scores&.find_by(workout_id: workout.id) %>
           <% if score %>
-            <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 flex flex-col justify-center items-center">
+            <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 flex flex-col justify-center items-center border border-gray-200">
               <div><%= format_rank(score&.rank) %></div>
               <div class="text-sm">(<%= format_score(score&.main_score, score&.workout_type) %>)</div>
               <div class="text-sm"><%= score&.points %>pts</div>
             </div>
             <% else %>
-            <div class="<%= index.odd? ? 'bg-gray-100' : '' %>"></div>
+            <div class="<%= index.odd? ? 'bg-gray-100' : '' %> border border-gray-200"></div>
           <% end %>
         <% end %>
       <% end %>

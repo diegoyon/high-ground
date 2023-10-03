@@ -7,7 +7,7 @@
   <% end %>
   
   <turbo-frame id="leaderboard-frame" target="_top">
-    <div class="grid border border-black grid-cols-6">
+    <div class="grid border border-black grid-cols-<%= @workouts.count + 3 %>">
       <div class="p-2">Rank</div>
       <div class="p-2">Athlete</div>
       <div class="p-2">Total</div>
