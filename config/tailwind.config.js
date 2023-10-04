@@ -26,6 +26,7 @@ module.exports = {
     require('@tailwindcss/container-queries'),
   ],
   safelist: [
+    'grid-cols-[1fr_4fr_1fr]',
     'grid-cols-[1fr_4fr_1fr_repeat(1,_2fr)]',
     'grid-cols-[1fr_4fr_1fr_repeat(2,_2fr)]',
     'grid-cols-[1fr_4fr_1fr_repeat(3,_2fr)]',

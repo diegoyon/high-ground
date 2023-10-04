@@ -40,7 +40,7 @@
     <% end %>
 
     <!-- Desktop Version -->
-    <div class="hidden container mx-auto md:grid grid-cols-[1fr_4fr_1fr_repeat(<%= @workouts.count %>,_2fr)] my-8 border border-gray-200">
+    <div class="hidden container mx-auto md:grid grid-cols-[1fr_4fr_1fr<%= @workouts.count.positive? ? "_repeat(#{@workouts.count},_2fr)" : '' %>] my-8 border border-gray-200">
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Rank</div>
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Athlete</div>
       <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Points</div>
