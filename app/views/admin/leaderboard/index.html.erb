@@ -6,7 +6,7 @@
     <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' } %>
   <% end %>
   
-  <turbo-frame id="admin-leaderboard-frame">
+  <turbo-frame id="admin-leaderboard-frame" target="_top">
     <div class="grid border border-black grid-cols-<%= @workouts.count + 3 %>">
       <div class="p-2">Rank</div>
       <div class="p-2">Athlete</div>
