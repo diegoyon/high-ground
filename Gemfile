@@ -77,3 +77,4 @@ end
 gem "httparty"
 gem "byebug"
 gem "font-awesome-sass"
+gem "devise"

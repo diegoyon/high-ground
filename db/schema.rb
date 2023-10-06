@@ -10,8 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_04_225046) do
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
 
   create_table "athletes", force: :cascade do |t|
@@ -23,6 +24,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
     t.string "tshirt_name"
     t.string "box"
     t.string "division"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "rank"
+    t.integer "total_points", default: 0
+  end
+
+  create_table "bank_deposits", force: :cascade do |t|
+    t.integer "amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -38,7 +47,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
     t.string "division"
     t.string "payment_status"
     t.integer "transaction_id"
-    t.string "reference"
     t.jsonb "fri_request_payment_response"
     t.jsonb "fri_transaction_status_response"
     t.jsonb "fri_webhook_response"
@@ -87,5 +95,43 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_172130) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "scores", force: :cascade do |t|
+    t.bigint "athlete_id", null: false
+    t.bigint "workout_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "points"
+    t.integer "rank"
+    t.integer "main_score"
+    t.integer "tiebreak_score"
+    t.index ["athlete_id"], name: "index_scores_on_athlete_id"
+    t.index ["workout_id"], name: "index_scores_on_workout_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "workouts", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "workout_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "tiebreak_type"
+    t.integer "workout_number"
+    t.integer "time_cap"
+  end
+
   add_foreign_key "payments", "athletes"
+  add_foreign_key "scores", "athletes"
+  add_foreign_key "scores", "workouts"
 end

@@ -1,0 +1,47 @@
+<%= form_with(model: workout, class: "contents") do |form| %>
+  <% if workout.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
+
+      <ul>
+        <% workout.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label "Número de Workout" %>
+    <%= form.number_field :workout_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Nombre" %>
+    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Tipo de workout" %>
+    <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Descripción" %>
+    <%= form.text_area :description, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Tipo de tiebreak" %>
+    <%= form.select :tiebreak_type, ['None', 'Time', 'AMRAP', 'Weight'], class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label "Timecap" %>
+    <%= form.text_field :time_cap, value: format_time(workout.time_cap), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>

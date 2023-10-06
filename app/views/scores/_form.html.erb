@@ -1,0 +1,32 @@
+<%= form_with(model: score, class: "contents") do |form| %>
+  <% if score.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
+      <h2><%= pluralize(score.errors.count, "error") %> prohibited this score from being saved:</h2>
+
+      <ul>
+        <% score.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label "Score" %>
+    <%= form.text_field :main_score, value: (score.workout_type == 'Time' ? format_time(score.main_score) : score.main_score), placeholder: score_placeholder(score.workout_type), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <% if score.has_tiebreak? %>
+    <div class="my-5">
+      <%= form.label "Tiebreak" %>
+      <%= form.text_field :tiebreak_score, value: (score.tiebreak_type == 'Time' ? format_time(score.tiebreak_score) : score.tiebreak_score), placeholder: score_placeholder(score.tiebreak_type), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+  <% end %>
+
+  <%= form.hidden_field :athlete_id %>
+  <%= form.hidden_field :workout_id %>
+
+  <div class="inline">
+    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+  </div>
+<% end %>
