@@ -148,7 +148,7 @@ athlete = Athlete.new(
   tshirt_size: 'M',
   tshirt_name: 'Pam',
   box: 'Crossfit Xela',
-  division: 'Intermedio Fememino',
+  division: 'Intermedio Femenino',
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -169,7 +169,7 @@ athlete = Athlete.new(
   tshirt_size: 'S',
   tshirt_name: 'MOLINA',
   box: 'Crossfit Xela',
-  division: 'Intermedio Fememino',
+  division: 'Intermedio Femenino',
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -213,4 +213,30 @@ athlete.update!(
   tshirt_name: 'Anita',
   box: 'Crossfit Xela',
   division: 'Scaled Femenino',
+)
+
+
+athlete = Athlete.new(
+  first_name: 'Juan Marcos',
+  last_name: 'Arias Morales',
+  email: 'ariasmoralesmarcos@gmail.com',
+  phone: '58337434',
+  tshirt_size: 'L',
+  box: '1057 training',
+  division: 'Scaled Masculino',
+)
+
+deposit = BankDeposit.create!(amount: 650)
+
+athlete.build_payment(
+  payment_status: 'completed',
+  paymentable: deposit
+)
+
+athlete.save!
+
+
+athlete = Athlete.find(36)
+athlete.update!(
+  division: 'Intermedio Femenino',
 )
