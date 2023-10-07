@@ -1,8 +1,11 @@
-<footer class="bg-hg-black py-10 flex justify-center gap-10">
-  <%= link_to 'https://www.instagram.com/highgroundfitnesscomp/', target: '_blank' do  %>
-    <i class="fa-brands fa-instagram fa-xl" style="color: #ffffff"></i>
-  <% end %>
-  <%= link_to 'https://www.facebook.com/highgroundfitnesscomp', target: '_blank' do  %>
-    <i class="fa-brands fa-facebook fa-xl" style="color: #ffffff"></i>
-  <% end %>
+<footer class="bg-hg-black py-10 flex flex-col justify-center items center text-center gap-5">
+  <div class="flex justify-center gap-10">
+    <%= link_to 'https://www.instagram.com/highgroundfitnesscomp/', target: '_blank' do  %>
+      <i class="fa-brands fa-instagram fa-xl" style="color: #ffffff"></i>
+    <% end %>
+    <%= link_to 'https://www.facebook.com/highgroundfitnesscomp', target: '_blank' do  %>
+      <i class="fa-brands fa-facebook fa-xl" style="color: #ffffff"></i>
+    <% end %>
+  </div>
+  <div class="text-white text-xs">Web by <%= link_to "HighGround", 'https://www.instagram.com/highgroundfitnesscomp/', class: "font-semibold" %></div>
 </footer>
