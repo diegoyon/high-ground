@@ -1,50 +1,39 @@
 <section class="container mx-auto">
-  Admin Leaderboard
-  <%= link_to "Log Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "rounded p-3 bg-red-500 text-white font-medium w-fit h-fit mx-auto" %>
+
+  <div class="flex flex-col gap-5">
+  <h1 class="text-4xl font-semibold uppercase">Admin Leaderboard</h1>
   <%= form_with url: "/admin/leaderboard", method: :get, data: { controller: "actions", turbo_frame: 'admin-leaderboard-frame' } do |form| %>
     <%= form.text_field :query, data: { action: 'input->actions#submit' }, type: "search", placeholder: "Start typing to search..." %>
     <%= form.select :division, options_for_select(["Scaled Femenino", "Scaled Masculino", "Intermedio Femenino", "Intermedio Masculino", "RX Masculino"], "Scaled Femenino"), {}, data: { action: 'change->actions#submit' } %>
   <% end %>
+  </div>
   
   <turbo-frame id="admin-leaderboard-frame" target="_top">
-    <div class="grid border border-black grid-cols-<%= @workouts.count + 3 %>">
-      <div class="p-2">Rank</div>
-      <div class="p-2">Athlete</div>
-      <div class="p-2">Total</div>
+    <div class="grid grid-cols-[1fr_4fr_1fr<%= @workouts.count.positive? ? "_repeat(#{@workouts.count},_2fr)" : '' %>] my-8 border border-gray-200">
+      <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Rank</div>
+      <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Athlete</div>
+      <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Points</div>
       <% @workouts.each_with_index do |workout, index| %>
-        <div>
-          <div class="p-2">Workout <%= index + 1 %></div>
-          <div class="p-2"><%= workout.name %></div>
-        </div>
+        <div class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Workout <%= index + 1 %></div>
       <% end %>
-      <% @athletes.each do |athlete| %>
-        <div class="p-2"><%= athlete&.rank || 0 %></div>
-        <div class="flex flex-col p-2">
-          <div class="uppercase font-semibold"><%= athlete.full_name %></div>
-          <div class="uppercase text-gray-500 text-sm"><%= athlete.box %></div>
-        </div>
-        <div class=""><%= athlete&.total_points %></div>
+      <% @athletes.each_with_index do |athlete, index| %>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= athlete.rank %></div>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center border border-gray-200 justify-start uppercase px-4"><%= athlete.full_name %></div>
+        <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-sm font-semibold flex items-center border border-gray-200 justify-center"><%= athlete.total_points %></div>
+
         <% @workouts.each do |workout| %>
           <% score = athlete&.scores&.find_by(workout_id: workout.id) %>
-          <div class="flex justify-between px-5 items-center">
-            <% if score %>
-              <div class="flex gap-5">
-                <div class="font-semibold">
-                  <%= score.points %>
-                </div>
-                <div>
-                  <%= score.rank %>
-                </div>
-                <div>
-                  <%= format_score(score.main_score, score.workout_type) %>
-                </div>
+          <% if score %>
+            <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 flex flex-row justify-around items-center border border-gray-200">
+              <div class="flex flex-col text-center">
+                <div class="text-xs"><%= format_rank(score&.rank) %></div>
+                <div class="text-xs">(<%= format_score(score&.main_score, score&.workout_type) %>)</div>
+                <div class="text-xs"><%= score&.points %>pts</div>
                 <% if score.has_tiebreak? %>
-                  <div>
-                    <%= format_score(score.tiebreak_score, score.tiebreak_type) %>
-                  </div>
+                    <div class="text-xs">TB: <%= format_score(score.tiebreak_score, score.tiebreak_type) %></div>
                 <% end %>
               </div>
-              <div class="flex gap-4">
+              <div class="flex gap-2">
                 <%= link_to edit_score_path(score) do %>
                   <i class="fa-regular fa-pen-to-square"></i>
                 <% end %>
@@ -52,13 +41,16 @@
                   <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
                 <% end %>
               </div>
-            <% else %>
-              <%= link_to 'Add score', new_score_path(athlete_id: athlete.id, workout_id: workout.id), class: "rounded p-3 bg-gray-500 text-white font-medium w-fit h-fit mx-auto" %>
-            <% end %>
-          </div>
+            </div>
+          <% else %>
+            <div class="<%= index.odd? ? 'bg-gray-100' : '' %> border border-gray-200 flex items-center justify-center">
+              <%= link_to new_score_path(athlete_id: athlete.id, workout_id: workout.id), class: "" do %>
+                <i class="fa-regular fa-square-plus fa-xl" style="color: #263940;"></i>
+              <% end %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
   </turbo-frame>
-  
 </section>

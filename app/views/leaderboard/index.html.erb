@@ -60,7 +60,7 @@
               <div class="text-sm">(<%= format_score(score&.main_score, score&.workout_type) %>)</div>
               <div class="text-sm"><%= score&.points %>pts</div>
             </div>
-            <% else %>
+          <% else %>
             <div class="<%= index.odd? ? 'bg-gray-100' : '' %> border border-gray-200"></div>
           <% end %>
         <% end %>
