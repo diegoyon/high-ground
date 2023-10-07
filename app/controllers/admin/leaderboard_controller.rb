@@ -5,7 +5,7 @@ class Admin::LeaderboardController < ApplicationController
     @athletes = Athlete.ready.order(:rank)
     search_athletes
     filter_athletes
-    @workouts = Workout.order(:workout_number)
+    @workouts = Workout.visible.order(:workout_number)
   end
 
   private

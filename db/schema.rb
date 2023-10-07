@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_04_225046) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_07_213334) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -129,6 +129,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_04_225046) do
     t.string "tiebreak_type"
     t.integer "workout_number"
     t.integer "time_cap"
+    t.boolean "visible", default: false
   end
 
   add_foreign_key "payments", "athletes"

@@ -2,7 +2,7 @@ class LeaderboardController < ApplicationController
   def index
     @athletes = Athlete.ready.order(:rank)
     filter_athletes
-    @workouts = Workout.order(:workout_number)
+    @workouts = Workout.visible.order(:workout_number)
   end
 
   private

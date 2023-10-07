@@ -7,4 +7,6 @@ class Workout < ApplicationRecord
   validates :tiebreak_type, presence: true
   validates :workout_number, presence: true, uniqueness: true
   validates :time_cap, presence: true, if: -> { workout_type == "Time" }
+
+  scope :visible, -> { where(visible: true) }
 end
