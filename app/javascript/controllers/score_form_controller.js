@@ -1,11 +1,12 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="controller"
 export default class extends Controller {
   static targets = ["cappedField", "mainScoreField", "mainScoreCappedField"]
 
   connect() {
-    this.toggleMainScoreField();
+    if (this.hasCappedFieldTarget) {
+      this.toggleMainScoreField();
+    }
   }
 
   toggleMainScoreField() {
