@@ -5,8 +5,9 @@ class Score < ApplicationRecord
   validates :athlete_id, uniqueness: { scope: :workout_id }
   validates :main_score, presence: true
   validates :tiebreak_score, presence: true, if: :has_tiebreak?
+  validates :tiebreak_score, numericality: { less_than_or_equal_to: :time_cap }, if: -> { has_tiebreak? && tiebreak_type == "Time" }
 
-  delegate :workout_type, :tiebreak_type, to: :workout
+  delegate :workout_type, :tiebreak_type, :time_cap, to: :workout
 
   after_save :handle_score_changes
   after_destroy :handle_score_changes

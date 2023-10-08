@@ -24,17 +24,17 @@ class ScoresController < ApplicationController
 
   # POST /scores or /scores.json
   def create
-    @score = Score.new(score_params)
+    modified_score_params = score_params.dup.except(:cap_score)
+    @score = Score.new(modified_score_params)
 
     if @score.workout_type == "Time"
-      modified_score_params = score_params.dup
       minutes, seconds = modified_score_params[:main_score].split(":")
       modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+      modified_score_params[:main_score] = @score.time_cap + score_params[:cap_score].to_i if score_params[:cap_score].present?
       @score = Score.new(modified_score_params)
     end
 
     if @score.has_tiebreak? && @score.tiebreak_type == "Time"
-      modified_score_params = modified_score_params.dup || score_params.dup
       minutes, seconds = modified_score_params[:tiebreak_score].split(":")
       modified_score_params[:tiebreak_score] = minutes.to_i * 60 + seconds.to_i
       @score = Score.new(modified_score_params)
@@ -53,11 +53,12 @@ class ScoresController < ApplicationController
 
   # PATCH/PUT /scores/1 or /scores/1.json
   def update
-    modified_score_params = score_params.dup
+    modified_score_params = score_params.dup.except(:cap_score)
 
     if @score.workout_type == "Time"
       minutes, seconds = modified_score_params[:main_score].split(":")
       modified_score_params[:main_score] = minutes.to_i * 60 + seconds.to_i
+      modified_score_params[:main_score] = @score.time_cap + score_params[:cap_score].to_i if score_params[:cap_score].present?
     end
 
     if @score.has_tiebreak? && @score.tiebreak_type == "Time"
@@ -90,6 +91,6 @@ class ScoresController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def score_params
-      params.require(:score).permit(:main_score, :tiebreak_score, :athlete_id, :workout_id)
+      params.require(:score).permit(:main_score, :tiebreak_score, :athlete_id, :workout_id, :capped, :cap_score)
     end
 end

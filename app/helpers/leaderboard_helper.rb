@@ -3,14 +3,18 @@ module LeaderboardHelper
     @workouts.count + 2
   end
 
-  def format_score(score, measurement_type)
+  def format_score(score, measurement_type, time_cap = nil)
     case measurement_type
     when "AMRAP"
       "#{score} reps"
     when "Weight"
       "#{score} lbs"
     when "Time"
-      format_time(score)
+      if time_cap.present? && score > time_cap
+        "CAP + #{score - time_cap}"
+      else
+        format_time(score)
+      end
     else
       ""
     end

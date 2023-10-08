@@ -9,4 +9,13 @@ class Workout < ApplicationRecord
   validates :time_cap, presence: true, if: -> { workout_type == "Time" }
 
   scope :visible, -> { where(visible: true) }
+
+  before_save :set_time_cap_to_nil unless -> { workout_type == "Time" }
+
+  private
+
+  def set_time_cap_to_nil
+    return unless time_cap.present?
+    self.time_cap = nil
+  end
 end

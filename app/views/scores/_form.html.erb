@@ -1,8 +1,7 @@
-<%= form_with(model: score, class: "contents") do |form| %>
+<%= form_with(model: score, class: "contents", data: { controller: 'score-form' }) do |form| %>
   <% if score.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(score.errors.count, "error") %> prohibited this score from being saved:</h2>
-
       <ul>
         <% score.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -11,9 +10,24 @@
     </div>
   <% end %>
 
-  <div class="my-5">
-    <%= form.label "Score" %>
-    <%= form.text_field :main_score, value: (score.workout_type == 'Time' ? format_time(score.main_score) : score.main_score), placeholder: score_placeholder(score.workout_type), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+  <% if score.workout_type == "Time" %>
+    <div class="my-5 flex items-center gap-3">
+      <%= form.label "Capped?" %>
+      <%= form.check_box :capped, class: "shadow rounded-md border border-gray-200 outline-none px-3", data: { score_form_target: "cappedField", action: "change->score-form#toggleMainScoreField" } %>
+    </div>
+  <% end %>
+
+  <div class="my-5 flex items-center gap-4" data-score-form-target="mainScoreField">
+    <%= form.label "Score:" %>
+    <%= form.text_field :main_score, value: (score.workout_type == 'Time' ? format_time(score.main_score) : score.main_score), placeholder: score_placeholder(score.workout_type), class: "shadow rounded-md border border-gray-200 outline-none w-full" %>
+  </div>
+
+  <div class="hidden" data-score-form-target="mainScoreCappedField">
+    <div>Score: <%= format_time(score.time_cap) %> </div>
+    <div class="my-5 flex items-center gap-2" >
+      <%= form.label "CAP +", class: "w-14" %>
+      <%= form.text_field :cap_score, value: (score.main_score.nil? ? '' : score.main_score - score.time_cap), placeholder: '23', class: "shadow rounded-md border border-gray-200 outline-none w-full" %>
+    </div>
   </div>
 
   <% if score.has_tiebreak? %>

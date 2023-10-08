@@ -1,4 +1,4 @@
-<%= form_with(model: workout, class: "contents") do |form| %>
+<%= form_with(model: workout, class: "contents", data: { controller: "workout" }) do |form| %>
   <% if workout.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
       <h2><%= pluralize(workout.errors.count, "error") %> prohibited this workout from being saved:</h2>
@@ -13,7 +13,7 @@
 
   <div class="my-5">
     <%= form.label "Número de Workout" %>
-    <%= form.number_field :workout_number, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.number_field :workout_number, placeholder: '1', class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
@@ -23,7 +23,7 @@
 
   <div class="my-5">
     <%= form.label "Tipo de workout" %>
-    <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full", data: { workout_target: 'workoutTypeSelect', action: 'change->workout#toggleTimecapField' } %>
   </div>
 
   <div class="my-5">
@@ -36,9 +36,9 @@
     <%= form.select :tiebreak_type, ['None', 'Time', 'AMRAP', 'Weight'], class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
+  <div class="my-5" data-workout-target="timecapField">
     <%= form.label "Timecap" %>
-    <%= form.text_field :time_cap, value: format_time(workout.time_cap), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.text_field :time_cap, placeholder: 'MM:SS', value: format_time(workout.time_cap), class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5 flex items-center gap-3">
