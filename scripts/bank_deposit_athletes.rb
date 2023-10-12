@@ -215,7 +215,7 @@ athlete.update!(
   division: 'Scaled Femenino',
 )
 
-
+######################12
 athlete = Athlete.new(
   first_name: 'Juan Marcos',
   last_name: 'Arias Morales',
@@ -235,8 +235,28 @@ athlete.build_payment(
 
 athlete.save!
 
-
+######################13
 athlete = Athlete.find(36)
 athlete.update!(
   division: 'Intermedio Femenino',
 )
+
+######################14
+athlete = Athlete.new(
+  first_name: 'Mónica Esther',
+  last_name: 'Méndez Fuentes',
+  email: 'memf9912@gmail.com',
+  phone: '47029644',
+  tshirt_size: 'XS',
+  box: 'Z1',
+  division: 'Scaled Femenino',
+)
+
+payment = RecurrenteCheckout.create!(checkout_id: "ch_yuf3xd8jgmfmrvzq")
+
+athlete.build_payment(
+  payment_status: 'completed',
+  paymentable: payment
+)
+
+athlete.save!
