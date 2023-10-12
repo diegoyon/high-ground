@@ -1,0 +1,14 @@
+require: rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.2.2
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'config/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+Bundler/OrderedGems:
+  Enabled: false
