@@ -3,6 +3,8 @@
 class FriAthletesController < ApplicationController
   before_action :set_athlete, only: %i[show edit update destroy]
 
+  include FriActions
+
   # GET /athletes or /athletes.json
   def index
     @athletes = Athlete.all
@@ -26,19 +28,7 @@ class FriAthletesController < ApplicationController
     fri_checkout = FriCheckout.new(athlete_params[:payment_attributes][:paymentable_attributes])
     @athlete.build_payment(paymentable: fri_checkout)
     if @athlete.valid?
-      api_data = request_payment
-      if api_data['info']['type'] == 'success'
-        @athlete.payment.paymentable.fri_request_payment_response = api_data['responseContent']
-        @athlete.payment.payment_status = api_data['responseContent']['transaction']['status']
-        @athlete.payment.paymentable.transaction_id = api_data['responseContent']['transaction']['id']
-        @athlete.save
-        redirect_to success_path, notice: 'Hemos recibido tus datos correctamente.'
-      elsif api_data['info']['type'] == 'error'
-        @athlete.errors.add(:base, api_data['info']['message'])
-        render :new, status: :unprocessable_entity
-      else
-        render :new, status: :unprocessable_entity
-      end
+      process_successful_payment
     else
       render :new, status: :unprocessable_entity
     end
@@ -77,50 +67,5 @@ class FriAthletesController < ApplicationController
   def athlete_params
     params.require(:athlete).permit(:first_name, :last_name, :email, :phone, :tshirt_size, :tshirt_name, :box, :division,
                                     payment_attributes: [paymentable_attributes: [:fri_username]])
-  end
-
-  def request_payment
-    username = Rails.application.credentials.dig(:all_environments, :fri, :username)
-    password = Rails.application.credentials.dig(:all_environments, :fri, :password)
-
-    # Login
-    api_response_login = HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/login', {
-                                         body: {
-                                           username:,
-                                           password:
-                                         }.to_json,
-                                         headers: { 'Content-Type' => 'application/json' }
-                                       })
-    api_data = JSON.parse(api_response_login.body)
-    sessionId = api_data['responseContent']['sessionId']
-
-    # Request payment
-    api_response_request_payment = HTTParty.post('https://api.negocios.soyfri.com/business/transactions/v1/requests/send', {
-                                                   body: {
-                                                     info: {},
-                                                     requestContent: {
-                                                       friUsername: @athlete.payment.paymentable.fri_username,
-                                                       amount: '650',
-                                                       reference: "high-ground-#{SecureRandom.hex(4)}"
-                                                     }
-                                                   }.to_json,
-                                                   headers: {
-                                                     'Content-Type' => 'application/json',
-                                                     'Authorization' => "Bearer #{sessionId}"
-                                                   }
-                                                 })
-
-    # Logout
-    HTTParty.post('https://api.negocios.soyfri.com/business/auth/v1/logout', {
-                    body: {
-                      info: {}
-                    }.to_json,
-                    headers: {
-                      'Content-Type' => 'application/json',
-                      'Authorization' => "Bearer #{sessionId}"
-                    }
-                  })
-
-    JSON.parse(api_response_request_payment.body)
   end
 end
