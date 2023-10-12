@@ -6,16 +6,16 @@ class Workout < ApplicationRecord
   validates :workout_type, presence: true
   validates :tiebreak_type, presence: true
   validates :workout_number, presence: true, uniqueness: true
-  validates :time_cap, presence: true, if: -> { workout_type == "Time" }
+  validates :time_cap, presence: true #, if: -> { workout_type == "Time" }
 
   scope :visible, -> { where(visible: true) }
 
-  before_save :set_time_cap_to_nil unless -> { workout_type == "Time" }
+  # before_save :set_time_cap_to_nil unless -> { workout_type == "Time" }
 
-  private
+  # private
 
-  def set_time_cap_to_nil
-    return unless time_cap.present?
-    self.time_cap = nil
-  end
+  # def set_time_cap_to_nil
+  #   return unless time_cap.present?
+  #   self.time_cap = nil
+  # end
 end
