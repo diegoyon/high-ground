@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ScoresHelper
   def score_placeholder(workout_or_tiebreak_type)
     case workout_or_tiebreak_type

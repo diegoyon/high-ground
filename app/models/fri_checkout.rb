@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FriCheckout < ApplicationRecord
   has_one :payment, as: :paymentable
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Workout < ApplicationRecord
   has_many :scores, dependent: :destroy
 
@@ -6,7 +8,7 @@ class Workout < ApplicationRecord
   validates :workout_type, presence: true
   validates :tiebreak_type, presence: true
   validates :workout_number, presence: true, uniqueness: true
-  validates :time_cap, presence: true #, if: -> { workout_type == "Time" }
+  validates :time_cap, presence: true # , if: -> { workout_type == "Time" }
 
   scope :visible, -> { where(visible: true) }
 

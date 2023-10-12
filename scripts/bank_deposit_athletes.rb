@@ -1,4 +1,6 @@
-######################1
+# frozen_string_literal: true
+
+# #####################1
 athlete = Athlete.new(
   first_name: 'Diego',
   last_name: 'Mendoza',
@@ -6,7 +8,7 @@ athlete = Athlete.new(
   phone: '55250009',
   tshirt_size: 'L',
   box: 'B. Box Training',
-  division: 'RX Masculino',
+  division: 'RX Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 500)
@@ -18,7 +20,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################2
+# #####################2
 athlete = Athlete.new(
   first_name: 'Isabella Sofía',
   last_name: 'Mendoza Berganza',
@@ -26,7 +28,7 @@ athlete = Athlete.new(
   phone: '33829422',
   tshirt_size: 'XS',
   box: 'B. Box Training',
-  division: 'Scaled Femenino',
+  division: 'Scaled Femenino'
 )
 
 deposit = BankDeposit.create!(amount: 500)
@@ -38,7 +40,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################3
+# #####################3
 athlete = Athlete.new(
   first_name: 'Jose',
   last_name: 'Davila',
@@ -46,7 +48,7 @@ athlete = Athlete.new(
   phone: '53189931',
   tshirt_size: 'L',
   box: 'B. Box Training',
-  division: 'Intermedio Masculino',
+  division: 'Intermedio Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 500)
@@ -58,7 +60,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################4
+# #####################4
 athlete = Athlete.new(
   first_name: 'Freddy',
   last_name: 'Muñoz',
@@ -66,7 +68,7 @@ athlete = Athlete.new(
   phone: '58252289',
   tshirt_size: 'L',
   box: 'Holy Program',
-  division: 'RX Masculino',
+  division: 'RX Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -78,7 +80,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################5
+# #####################5
 athlete = Athlete.new(
   first_name: 'Diego',
   last_name: 'Morales',
@@ -86,7 +88,7 @@ athlete = Athlete.new(
   phone: '59229112',
   tshirt_size: 'M',
   box: 'Oaks CF',
-  division: 'RX Masculino',
+  division: 'RX Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -98,7 +100,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################6
+# #####################6
 athlete = Athlete.new(
   first_name: 'Josue',
   last_name: 'Ramos',
@@ -106,7 +108,7 @@ athlete = Athlete.new(
   phone: '41782059',
   tshirt_size: 'M',
   box: 'Thebox-bbox',
-  division: 'RX Masculino',
+  division: 'RX Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -118,7 +120,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################7
+# #####################7
 athlete = Athlete.new(
   first_name: 'Héctor',
   last_name: 'Citalan',
@@ -127,7 +129,7 @@ athlete = Athlete.new(
   tshirt_size: 'S',
   tshirt_name: 'Héctor',
   box: 'Crossfit Xela',
-  division: 'RX Masculino',
+  division: 'RX Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -139,7 +141,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################8
+# #####################8
 athlete = Athlete.new(
   first_name: 'Pamela',
   last_name: 'Hernández',
@@ -148,7 +150,7 @@ athlete = Athlete.new(
   tshirt_size: 'M',
   tshirt_name: 'Pam',
   box: 'Crossfit Xela',
-  division: 'Intermedio Femenino',
+  division: 'Intermedio Femenino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -160,7 +162,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################9
+# #####################9
 athlete = Athlete.new(
   first_name: 'Hanny Paola',
   last_name: 'Molina Arriola',
@@ -169,7 +171,7 @@ athlete = Athlete.new(
   tshirt_size: 'S',
   tshirt_name: 'MOLINA',
   box: 'Crossfit Xela',
-  division: 'Intermedio Femenino',
+  division: 'Intermedio Femenino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -181,7 +183,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################10
+# #####################10
 athlete = Athlete.new(
   first_name: 'Diustin Alfredo',
   last_name: 'De Paz Lopez',
@@ -190,7 +192,7 @@ athlete = Athlete.new(
   tshirt_size: 'L',
   tshirt_name: 'Dius',
   box: 'Crossfit Xela',
-  division: 'Scaled Masculino',
+  division: 'Scaled Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 0)
@@ -202,7 +204,7 @@ athlete.build_payment(
 
 athlete.save!
 
-######################11
+# #####################11
 athlete = Athlete.find(39)
 athlete.update!(
   first_name: 'Ana',
@@ -212,10 +214,10 @@ athlete.update!(
   tshirt_size: 'S',
   tshirt_name: 'Anita',
   box: 'Crossfit Xela',
-  division: 'Scaled Femenino',
+  division: 'Scaled Femenino'
 )
 
-######################12
+# #####################12
 athlete = Athlete.new(
   first_name: 'Juan Marcos',
   last_name: 'Arias Morales',
@@ -223,7 +225,7 @@ athlete = Athlete.new(
   phone: '58337434',
   tshirt_size: 'L',
   box: '1057 training',
-  division: 'Scaled Masculino',
+  division: 'Scaled Masculino'
 )
 
 deposit = BankDeposit.create!(amount: 650)
@@ -235,13 +237,13 @@ athlete.build_payment(
 
 athlete.save!
 
-######################13
+# #####################13
 athlete = Athlete.find(36)
 athlete.update!(
-  division: 'Intermedio Femenino',
+  division: 'Intermedio Femenino'
 )
 
-######################14
+# #####################14
 athlete = Athlete.new(
   first_name: 'Mónica Esther',
   last_name: 'Méndez Fuentes',
@@ -249,10 +251,10 @@ athlete = Athlete.new(
   phone: '47029644',
   tshirt_size: 'XS',
   box: 'Z1',
-  division: 'Scaled Femenino',
+  division: 'Scaled Femenino'
 )
 
-payment = RecurrenteCheckout.create!(checkout_id: "ch_yuf3xd8jgmfmrvzq")
+payment = RecurrenteCheckout.create!(checkout_id: 'ch_yuf3xd8jgmfmrvzq')
 
 athlete.build_payment(
   payment_status: 'completed',

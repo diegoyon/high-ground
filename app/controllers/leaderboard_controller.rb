@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LeaderboardController < ApplicationController
   def index
     @athletes = Athlete.ready.order(:rank).includes(:scores)
@@ -6,12 +8,12 @@ class LeaderboardController < ApplicationController
   end
 
   private
-  
+
   def filter_athletes
-    if params[:division].present?
-      @athletes = @athletes.where(division: params[:division])
-    else
-      @athletes = @athletes.where(division: "Scaled Femenino") #default
-    end
+    @athletes = if params[:division].present?
+                  @athletes.where(division: params[:division])
+                else
+                  @athletes.where(division: 'Scaled Femenino') # default
+                end
   end
 end

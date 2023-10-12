@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 old_athletes = FriAthlete.all
 
 old_athletes.each do |old_athlete|
-
   athlete = Athlete.create!(
     first_name: old_athlete.first_name,
     last_name: old_athlete.last_name,
@@ -25,7 +26,7 @@ old_athletes.each do |old_athlete|
   )
 
   payment = Payment.create!(
-    athlete: athlete,
+    athlete:,
     payment_status: old_athlete.payment_status,
     paymentable: fri_checkout,
     created_at: old_athlete.created_at,
