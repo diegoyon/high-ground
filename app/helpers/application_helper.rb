@@ -6,6 +6,6 @@ module ApplicationHelper
 
     minutes = seconds / 60
     seconds = seconds % 60
-    format('%02d:%02d', minutes, seconds)
+    format('%<minutes>02d:%<seconds>02d', minutes:, seconds:)
   end
 end
