@@ -32,7 +32,7 @@
         <div id="athlete_<%= athlete.id %>_details" class="max-h-0 overflow-hidden transition-all ease-in-out duration-300 flex flex-col px-10">
           <% athlete.scores.each do |score| %>
             <p class="text-sm leading-loose">
-              <%= score.workout.name %>: <%= format_rank(score.rank) %> (<%= format_score(score.main_score, score.workout_type, score.time_cap) %>) <%= score.points %>pts
+              <%= score.workout.name %>: <%= format_rank(score.rank) %> (<%= format_score(score) %>) <%= score.points %>pts
             </p>
           <% end %>
         </div>
@@ -57,7 +57,7 @@
           <% if score %>
             <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 flex flex-col justify-center items-center border border-gray-200">
               <div><%= format_rank(score&.rank) %></div>
-              <div class="text-sm">(<%= format_score(score&.main_score, score&.workout_type, score&.time_cap) %>)</div>
+              <div class="text-sm">(<%= format_score(score) %>)</div>
               <div class="text-sm"><%= score&.points %>pts</div>
             </div>
           <% else %>

@@ -27,10 +27,10 @@
             <div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 flex flex-row justify-around items-center border border-gray-200">
               <div class="flex flex-col text-center">
                 <div class="text-xs"><%= format_rank(score&.rank) %></div>
-                <div class="text-xs">(<%= format_score(score&.main_score, score&.workout_type, score&.time_cap) %>)</div>
+                <div class="text-xs">(<%= format_score(score) %>)</div>
                 <div class="text-xs"><%= score&.points %>pts</div>
                 <% if score.has_tiebreak? %>
-                    <div class="text-xs">TB: <%= format_score(score.tiebreak_score, score.tiebreak_type) %></div>
+                    <div class="text-xs">TB: <%= format_tiebreak_score(score) %></div>
                 <% end %>
               </div>
               <div class="flex gap-2">
