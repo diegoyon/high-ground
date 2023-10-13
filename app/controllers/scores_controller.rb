@@ -4,6 +4,8 @@ class ScoresController < ApplicationController
   before_action :authenticate_user!
   before_action :set_score, only: %i[show edit update destroy]
 
+  include TimeConversion
+
   def index
     @scores = Score.all.includes(:athlete, :workout)
   end
@@ -69,10 +71,5 @@ class ScoresController < ApplicationController
     params[:tiebreak_score] = time_to_seconds(params[:tiebreak_score]) if score.tiebreak_type == 'Time'
 
     params
-  end
-
-  def time_to_seconds(time)
-    minutes, seconds = time.split(':')
-    minutes.to_i * 60 + seconds.to_i
   end
 end
