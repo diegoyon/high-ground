@@ -4,6 +4,8 @@ class Score < ApplicationRecord
   belongs_to :athlete
   belongs_to :workout
 
+  include ScoringSystem
+
   validates :athlete_id, uniqueness: { scope: :workout_id }
   validates :main_score, presence: true
   validates :tiebreak_score, presence: true, if: :has_tiebreak?
@@ -61,53 +63,6 @@ class Score < ApplicationRecord
       score.update_columns(points: calculate_points(rank), rank:)
       last_main_score = score.main_score
       last_tiebreak_score = score.tiebreak_score
-    end
-  end
-
-  def calculate_points(rank)
-    case rank
-    when 1
-      100
-    when 2
-      95
-    when 3
-      90
-    when 4
-      85
-    when 5
-      80
-    when 6
-      75
-    when 7
-      70
-    when 8
-      65
-    when 9
-      60
-    when 10
-      55
-    when 11
-      50
-    when 12
-      45
-    when 13
-      40
-    when 14
-      35
-    when 15
-      30
-    when 16
-      25
-    when 17
-      20
-    when 18
-      15
-    when 19
-      10
-    when 20
-      5
-    else
-      0
     end
   end
 
