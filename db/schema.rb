@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_07_232508) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_13_225039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -105,6 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_07_232508) do
     t.integer "main_score"
     t.integer "tiebreak_score"
     t.boolean "capped", default: false
+    t.index ["athlete_id", "workout_id"], name: "index_scores_on_athlete_id_and_workout_id", unique: true
     t.index ["athlete_id"], name: "index_scores_on_athlete_id"
     t.index ["workout_id"], name: "index_scores_on_workout_id"
   end

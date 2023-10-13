@@ -8,24 +8,22 @@ class Score < ApplicationRecord
 
   validates :athlete_id, uniqueness: { scope: :workout_id }
   validates :main_score, presence: true
-  validates :tiebreak_score, presence: true, if: :has_tiebreak?
-  validates :tiebreak_score, numericality: { less_than_or_equal_to: :time_cap }, if: lambda {
-                                                                                       has_tiebreak? && tiebreak_type == 'Time'
-                                                                                     }
+  validates :tiebreak_score, presence: true, if: :tiebreak?
+  validates :tiebreak_score, numericality: { less_than_or_equal_to: :time_cap }, if: -> { tiebreak_type == 'Time' }
 
   delegate :workout_type, :tiebreak_type, :time_cap, to: :workout
 
   after_save :handle_score_changes
   after_destroy :handle_score_changes
 
-  def has_tiebreak?
+  def tiebreak?
     tiebreak_type != 'None'
   end
 
   private
 
   def handle_score_changes
-    calculate_points_and_update_rank
+    calculate_score_points_and_rank
     update_athletes_total_points
     update_athletes_rank
   end
@@ -33,11 +31,11 @@ class Score < ApplicationRecord
   def update_athletes_total_points
     athletes = Athlete.ready.where(division: athlete.division)
     athletes.each do |athlete|
-      athlete.update_columns(total_points: athlete.scores.sum(:points))
+      athlete.total_points = athlete.scores.sum(:points)
+      athlete.save
     end
   end
 
-  # falta desempatar por event wins
   def update_athletes_rank
     athletes = Athlete.ready.where(division: athlete.division).order(total_points: :desc)
     rank = 0
@@ -45,15 +43,14 @@ class Score < ApplicationRecord
 
     athletes.each_with_index do |athlete, index|
       rank = index + 1 if athlete.total_points != last_total_points
-      athlete.update_columns(rank:)
+      athlete.rank = rank
+      athlete.save
       last_total_points = athlete.total_points
     end
   end
 
-  def calculate_points_and_update_rank
-    scores = Score.joins(:athlete).where(athletes: { division: athlete.division }).where(workout_id:).order(
-      main_score_order, tiebreak_score_order
-    )
+  def calculate_score_points_and_rank
+    scores = fetch_scores_in_order
     rank = 0
     last_main_score = nil
     last_tiebreak_score = nil
@@ -64,6 +61,12 @@ class Score < ApplicationRecord
       last_main_score = score.main_score
       last_tiebreak_score = score.tiebreak_score
     end
+  end
+
+  def fetch_scores_in_order
+    Score.joins(:athlete).where(athletes: { division: athlete.division }).where(workout_id:).order(
+      main_score_order, tiebreak_score_order
+    )
   end
 
   def main_score_order

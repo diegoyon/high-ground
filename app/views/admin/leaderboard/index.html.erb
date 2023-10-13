@@ -29,7 +29,7 @@
                 <div class="text-xs"><%= format_rank(score&.rank) %></div>
                 <div class="text-xs">(<%= format_score(score) %>)</div>
                 <div class="text-xs"><%= score&.points %>pts</div>
-                <% if score.has_tiebreak? %>
+                <% if score.tiebreak? %>
                     <div class="text-xs">TB: <%= format_tiebreak_score(score) %></div>
                 <% end %>
               </div>
