@@ -6,10 +6,15 @@ class Score < ApplicationRecord
 
   include ScoringSystem
 
+  attr_accessor :submitted_score, :cap_score
+
   validates :athlete_id, uniqueness: { scope: :workout_id }
-  validates :main_score, presence: true
   validates :tiebreak_score, presence: true, if: :tiebreak?
   validates :tiebreak_score, numericality: { less_than_or_equal_to: :time_cap }, if: -> { tiebreak_type == 'Time' }
+  validates :submitted_score, presence: true
+  validates :submitted_score, numericality: { less_than_or_equal_to: :time_cap }, if: -> { workout_type == 'Time' }
+  validates :cap_score, presence: true, if: :capped
+  validates :cap_score, numericality: { greater_than: 0 }, if: :capped
 
   delegate :workout_type, :tiebreak_type, :time_cap, to: :workout
 

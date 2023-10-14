@@ -13,4 +13,14 @@ module ScoresHelper
       ''
     end
   end
+
+  def cap_score_value(score)
+    if score.main_score
+      if (score.main_score - score.time_cap).positive?
+        score.main_score - score.time_cap
+      else
+        ''
+      end
+    end
+  end
 end

@@ -12,10 +12,14 @@ export default class extends Controller {
   toggleMainScoreField() {
     if (this.cappedFieldTarget.checked) {
       this.mainScoreFieldTarget.classList.add("hidden");
+      this.mainScoreFieldTarget.classList.remove("flex");
       this.mainScoreCappedFieldTarget.classList.remove("hidden");
+      this.mainScoreCappedFieldTarget.classList.add("flex");
     } else {
       this.mainScoreFieldTarget.classList.remove("hidden");
+      this.mainScoreFieldTarget.classList.add("flex");
       this.mainScoreCappedFieldTarget.classList.add("hidden");
+      this.mainScoreCappedFieldTarget.classList.remove("flex");
     }
   }
 }
