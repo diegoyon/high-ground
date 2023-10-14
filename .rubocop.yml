@@ -6,9 +6,13 @@ AllCops:
     - 'db/**/*'
     - 'bin/**/*'
     - 'config/**/*'
+    - 'scripts/**/*'
 
 Style/Documentation:
   Enabled: false
 
 Bundler/OrderedGems:
+  Enabled: false
+
+Rails/SkipsModelValidations:
   Enabled: false
