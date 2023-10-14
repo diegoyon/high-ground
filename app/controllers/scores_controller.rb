@@ -62,15 +62,25 @@ class ScoresController < ApplicationController
 
   def transform_time_scores_params(score, params)
     if params[:capped] == '1'
-      params[:main_score] = score.time_cap + params[:cap_score].to_i
-      params[:submitted_score] = score.time_cap
+      params = scores_if_capped(score, params)
     elsif score.workout_type == 'Time'
-      params[:main_score] = transform_main_time_score_params(score, params)
-      params[:submitted_score] = time_to_seconds(params[:submitted_score]) if params[:submitted_score].present?
+      params = scores_if_not_capped(score, params)
     else
       params[:main_score] = params[:submitted_score]
     end
     params[:tiebreak_score] = transform_tiebreak_time_score_params(params) if score.tiebreak_type == 'Time'
+    params
+  end
+
+  def scores_if_capped(score, params)
+    params[:main_score] = score.time_cap + params[:cap_score].to_i
+    params[:submitted_score] = score.time_cap
+    params
+  end
+
+  def scores_if_not_capped(score, params)
+    params[:main_score] = transform_main_time_score_params(score, params)
+    params[:submitted_score] = time_to_seconds(params[:submitted_score]) if params[:submitted_score].present?
     params
   end
 
