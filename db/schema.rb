@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_13_235225) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_14_004359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -36,25 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_235225) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "fri_athletes", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "phone"
-    t.string "fri_username"
-    t.string "tshirt_size"
-    t.string "box"
-    t.string "division"
-    t.string "payment_status"
-    t.integer "transaction_id"
-    t.jsonb "fri_request_payment_response"
-    t.jsonb "fri_transaction_status_response"
-    t.jsonb "fri_webhook_response"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "tshirt_name"
-  end
-
   create_table "fri_checkouts", force: :cascade do |t|
     t.string "fri_username"
     t.integer "transaction_id"
@@ -73,20 +54,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_13_235225) do
     t.bigint "athlete_id", null: false
     t.index ["athlete_id"], name: "index_payments_on_athlete_id"
     t.index ["paymentable_type", "paymentable_id"], name: "index_payments_on_paymentable"
-  end
-
-  create_table "recurrente_athletes", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "email"
-    t.string "phone"
-    t.string "tshirt_size"
-    t.string "box"
-    t.string "division"
-    t.string "payment_status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "checkout_id"
   end
 
   create_table "recurrente_checkouts", force: :cascade do |t|
