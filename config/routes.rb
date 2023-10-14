@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :leaderboard, only: [:index]
-  resources :workouts
+  resources :workouts, only: [:index, :show]
   resources :scores
 
   resources :athletes, only: [:index, :show]
@@ -23,5 +23,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :leaderboard, only: [:index]
+    resources :workouts
   end
 end

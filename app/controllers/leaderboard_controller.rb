@@ -4,7 +4,7 @@ class LeaderboardController < ApplicationController
   include FilterActions
 
   def index
-    @athletes = Athlete.ready.order(:rank).includes(:scores)
+    @athletes = Athlete.ready.order(:rank)
     filter_athletes
     @workouts = Workout.visible.order(:workout_number)
   end
