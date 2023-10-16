@@ -1,14 +1,16 @@
-<section class="container mx-auto py-16 px-5 lg:py-28 flex flex-col lg:flex-row w-full lg:items-center">
-  <%= image_tag 'logo.png', alt: 'logo', class: 'mx-5 h-64 object-contain mb-5 animate-appear lg:order-last lg:h-96 lg:flex-1 lg:mb-0 lg:animate-appear-right' %>
-  <div class="lg:flex-1">
-    <h1 class="font-extrabold text-6xl lg:text-8xl text-hg-black lg:animate-appear-left">HIGH GROUND</h1>
-    <h2 class="font-extrabold text-3xl lg:text-5xl text-hg-black lg:animate-appear-left">FITNESS COMPETITION</h2>
-    <h3 class="text-lg text-gray-600 max-w-lg my-7 max lg:animate-appear-left">¡Prepárate para competir y demostrar tu fitness! Nuestra competencia está abierta a cualquier atleta buscando ponerse a prueba y empujar sus límites.</h3>
-    <%= link_to 'Inscríbete', payment_options_path, class: "rounded-lg py-3 px-5 bg-hg-purple text-white block font-semibold uppercase w-fit hover:bg-white hover:text-hg-purple duration-200 hover:ease-in hover:outline lg:animate-appear-left" %>
+<section class="py-16 px-5 lg:py-28 bg-white">
+  <div class="container mx-auto flex flex-col lg:flex-row w-full lg:items-center">
+    <%= image_tag 'logo.png', alt: 'logo', class: 'mx-5 h-64 object-contain mb-5 animate-appear lg:order-last lg:h-96 lg:flex-1 lg:mb-0 lg:animate-appear-right' %>
+    <div class="lg:flex-1">
+      <h1 class="font-extrabold text-6xl lg:text-8xl text-hg-black lg:animate-appear-left">HIGH GROUND</h1>
+      <h2 class="font-extrabold text-3xl lg:text-5xl text-hg-black lg:animate-appear-left">FITNESS COMPETITION</h2>
+      <h3 class="text-lg text-gray-600 max-w-lg my-7 max lg:animate-appear-left">¡Prepárate para competir y demostrar tu fitness! Nuestra competencia está abierta a cualquier atleta buscando ponerse a prueba y empujar sus límites.</h3>
+      <%= link_to 'Inscríbete', payment_options_path, class: "rounded-lg py-3 px-5 bg-hg-purple text-white block font-semibold uppercase w-fit hover:bg-white hover:text-hg-purple duration-200 hover:ease-in hover:outline lg:animate-appear-left" %>
+    </div>
   </div>
 </section>
 
-<section class="bg-hg-black py-16">
+<section class="py-16">
   <div class="container mx-auto flex flex-col gap-10 lg:flex-row">
 
     <%= card_content(
@@ -30,19 +32,21 @@
   </div>
 </section>
 
-<section class="container mx-auto flex flex-col gap-24 py-16 lg:py-24 lg:gap-60 lg:flex-row justify-center" id="place&date">
-  <div class="flex flex-col justify-center items-center gap-5">
-    <i class="fa-regular fa-calendar-days fa-5x" style="color: #263940;"></i>
-    <div>
-      <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">14 y 15 de octubre</h2>
-      <h2 class="text-xl font-bold text-center text-hg-black lg:4xl">2023</h2>
+<section class="bg-white" id="place&date">
+  <div class="container mx-auto flex flex-col gap-16 py-16 lg:py-24 lg:gap-60 lg:flex-row justify-center">
+    <div class="flex flex-col justify-center items-center gap-5">
+      <i class="fa-regular fa-calendar-days fa-5x" style="color: #263940;"></i>
+      <div>
+        <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">Pendiente De Anunciar</h2>
+        <h2 class="text-xl font-bold text-center text-hg-black lg:4xl">2023</h2>
+      </div>
     </div>
-  </div>
-  <div class="flex flex-col justify-center items-center gap-5">
-    <i class="fa-solid fa-location-dot fa-5x" style="color: #263940;"></i>
-    <div>
-      <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">Aldea Infantil Rudolf Walther</h2>
-      <h2 class="text-xl font-bold text-center text-hg-black lg:4xl">Salcajá, Quetzaltenango</h2>
+    <div class="flex flex-col justify-center items-center gap-5">
+      <i class="fa-solid fa-location-dot fa-5x" style="color: #263940;"></i>
+      <div>
+        <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">Aldea Infantil Rudolf Walther</h2>
+        <h2 class="text-xl font-bold text-center text-hg-black lg:4xl">Salcajá, Quetzaltenango</h2>
+      </div>
     </div>
   </div>
 </section>
@@ -50,27 +54,29 @@
 <section class="bg-hg-black py-16">
   <div class="container mx-auto flex flex-col justify-center items-center gap-5">
     <h2 class="text-3xl w text-white font-bold text-center mx-5">EVENTOS PASADOS</h2>
-    <iframe class="w-full aspect-[16/9] max-w-2xl" src="https://www.youtube.com/embed/YpmgmtzmYDs?si=yrWWJNEXHlbsMKuv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe class="w-full aspect-[16/9] max-w-3xl" src="https://www.youtube.com/embed/YpmgmtzmYDs?si=yrWWJNEXHlbsMKuv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
   </div>
 </section>
 
-<section class="container mx-auto flex flex-col gap-5 py-16" id="sponsors">
-  <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">PATROCINADORES</h2>
-  <div class="grid grid-cols-1 mx-5 px-10 justify-items-center items-center lg:grid-cols-2">
-    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
-      <%= image_tag 'bi_horizontal.png', alt: 'Banco Industrial' %>
-    </div>
-    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
-      <%= image_tag 'doer_horizontal.png', alt: 'Doer Fitness' %>
-    </div>
-    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
-      <%= image_tag 'fri_blue.png', alt: 'Fri', class: 'h-24' %>
-    </div>
-    <div class="w-72 h-56 lg:h-72 flex justify-center items-center">
-      <%= image_tag 'powerade.png', alt: 'Powerade' %>
-    </div>
-    <div class="w-72 h-56 lg:h-72 flex justify-center items-center lg:col-span-2">
-      <%= image_tag 'crossfit_xela_plain.png', alt: 'CrossFit Xela' %>
+<section class="bg-white" id="sponsors">
+  <div class="container mx-auto flex flex-col gap-5 py-16">
+    <h2 class="text-3xl font-bold text-center text-hg-black lg:4xl">PATROCINADORES</h2>
+    <div class="grid grid-cols-1 mx-5 px-10 justify-items-center items-center lg:grid-cols-2">
+      <div class="w-72 h-36 lg:h-40 flex justify-center items-center">
+        <%= image_tag 'bi_horizontal.png', alt: 'Banco Industrial' %>
+      </div>
+      <div class="w-72 h-36 lg:h-40 flex justify-center items-center">
+        <%= image_tag 'doer_horizontal.png', alt: 'Doer Fitness' %>
+      </div>
+      <div class="w-72 h-36 lg:h-40 flex justify-center items-center">
+        <%= image_tag 'fri_blue.png', alt: 'Fri', class: 'h-20' %>
+      </div>
+      <div class="w-72 h-36 lg:h-40 flex justify-center items-center">
+        <%= image_tag 'powerade.png', alt: 'Powerade' %>
+      </div>
+      <div class="w-72 h-36 lg:h-40 flex justify-center items-center lg:col-span-2">
+        <%= image_tag 'crossfit_xela_plain.png', alt: 'CrossFit Xela' %>
+      </div>
     </div>
   </div>
 </section>
