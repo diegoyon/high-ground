@@ -16,6 +16,43 @@ module.exports = {
         'hg-purple': '#e81f9b',
         'hg-cyan': '#5ce1e6',
         'hg-black': '#263940'
+      },
+      animation: {
+        'appear': 'appear 3s ease',
+        'appear-left': 'appear-left 3s ease',
+        'appear-right': 'appear-right 3s ease',
+      },
+      keyframes: {
+        appear: {
+          '0%': {
+            transform: 'scale(0.8)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'scale(1)',
+            opacity: 1
+          },
+        },
+        'appear-left': {
+          '0%': {
+            transform: 'translateX(-100px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: 1
+          },
+        },
+        'appear-right': {
+          '0%': {
+            transform: 'translateX(100px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateX(0)',
+            opacity: 1
+          },
+        },
       }
     },
   },
