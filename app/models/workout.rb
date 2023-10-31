@@ -11,4 +11,8 @@ class Workout < ApplicationRecord
   validates :time_cap, presence: true
 
   scope :visible, -> { where(visible: true) }
+
+  def formatted_name
+    "Workout #{workout_number}"
+  end
 end

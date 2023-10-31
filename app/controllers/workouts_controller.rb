@@ -2,6 +2,6 @@
 
 class WorkoutsController < ApplicationController
   def index
-    @workouts = Workout.order(:workout_number)
+    @workout = Workout.find(params[:workout_id].presence || 1)
   end
 end

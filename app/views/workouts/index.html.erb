@@ -1,13 +1,20 @@
-<div class="container mx-auto">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Workouts</h1>
-  </div>
-
-  <div id="workouts">
-    <%= render @workouts %>
+<div class="bg-[url('fatima.jpg')] bg-cover bg-no-repeat bg-center relative h-40">
+  <div class="bg-black opacity-50 h-40">
   </div>
 </div>
+<div class="container mx-auto flex flex-col px-5 py-12 absolute">
+  <h2 class="text-sm font-semibold uppercase text-white">High Ground 2023</h2>
+  <h1 class="font-bold text-4xl uppercase text-white">Workouts</h1>
+</div>
+
+<div class="bg-hg-black">
+  <div class="flex justify-center py-5">
+    <%= form_with url: "/workouts", method: :get, data: { controller: "actions", turbo_frame: "workout-frame" } do |form|%>
+      <%= form.collection_select :workout_id, Workout.order(:workout_number), :id, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->actions#submit' } %>
+    <% end %>
+  </div>
+</div>
+
+<turbo-frame id="workout-frame" target="_top">
+  <%= render @workout %>
+</turbo-frame>

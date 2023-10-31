@@ -3,7 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['iconDown', 'iconUp'];
 
-
   toggle() {
     let elementId = `${this.element.id}_details`
     let athleteDetails = document.getElementById(elementId)

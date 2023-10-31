@@ -21,7 +21,7 @@
       <%= link_to 'Lugar y fecha', root_path(anchor: 'place&date'), class: "min-w-max mr-5" %>
       <%= link_to 'Patrocinadores', root_path(anchor: 'sponsors'), class: "mr-5" %>
       <%= link_to 'Inscríbete', payment_options_path, class: "rounded-lg py-2 px-4 border-2 border-hg-purple text-hg-purple block font-semibold uppercase w-fit hover:bg-hg-purple hover:text-white duration-200 hover:ease-in mr-5" %>
-      <%= link_to "Log Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "rounded p-3 bg-red-500 text-white font-medium w-fit h-fit mr-5 lg:mx-auto" if user_signed_in? %> 
+      <%= link_to "Log Out", destroy_user_session_path, data: { turbo_method: :delete }, class: "rounded p-3 bg-red-500 text-white font-medium min-w-max h-fit mr-5 lg:mx-auto" if user_signed_in? %> 
     </ul>
   </nav>
 </header>
