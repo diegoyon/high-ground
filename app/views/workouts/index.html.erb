@@ -10,11 +10,13 @@
 <div class="bg-hg-black">
   <div class="flex justify-center py-5">
     <%= form_with url: "/workouts", method: :get, data: { controller: "actions", turbo_frame: "workout-frame" } do |form|%>
-      <%= form.collection_select :workout_id, Workout.order(:workout_number), :id, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->actions#submit' } %>
+      <%= form.collection_select :workout_number, Workout.visible.order(:workout_number), :workout_number, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->actions#submit' } %>
     <% end %>
   </div>
 </div>
 
 <turbo-frame id="workout-frame" target="_top">
-  <%= render @workout %>
+  <% if @workout %>
+    <%= render @workout %>
+  <% end %>
 </turbo-frame>
