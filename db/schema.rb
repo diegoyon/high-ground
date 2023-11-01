@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_14_004359) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_01_054229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -34,6 +34,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_004359) do
     t.integer "amount", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "descriptions", force: :cascade do |t|
+    t.text "text"
+    t.string "division"
+    t.bigint "workout_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["division", "workout_id"], name: "index_descriptions_on_division_and_workout_id", unique: true
+    t.index ["workout_id"], name: "index_descriptions_on_workout_id"
   end
 
   create_table "fri_checkouts", force: :cascade do |t|
@@ -91,7 +101,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_004359) do
 
   create_table "workouts", force: :cascade do |t|
     t.string "name"
-    t.text "description"
     t.string "workout_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -102,6 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_14_004359) do
     t.index ["workout_number"], name: "index_workouts_on_workout_number", unique: true
   end
 
+  add_foreign_key "descriptions", "workouts"
   add_foreign_key "payments", "athletes"
   add_foreign_key "scores", "athletes"
   add_foreign_key "scores", "workouts"

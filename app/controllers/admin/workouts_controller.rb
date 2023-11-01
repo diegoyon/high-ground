@@ -15,6 +15,7 @@ module Admin
 
     def new
       @workout = Workout.new
+      @workout.descriptions.build
     end
 
     def edit; end
@@ -60,7 +61,7 @@ module Admin
 
     def workout_params
       params.require(:workout).permit(:name, :description, :workout_type, :workout_number, :tiebreak_type, :time_cap,
-                                      :visible)
+                                      :visible, descriptions_attributes: %i[id text division _destroy])
     end
 
     def transform_time_cap_to_seconds(modified_workout_params)
