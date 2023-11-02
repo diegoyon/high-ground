@@ -1,17 +1,16 @@
-<div id="<%= dom_id workout %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= workout.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Type:</strong>
-    <%= workout.workout_type %>
-  </p>
-  
-  <% if action_name != "show" %>
-    <%= link_to "Show this workout", admin_workout_path(workout), class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this workout', edit_admin_workout_path(workout), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
+<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_number %></div>
+<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center capitalize"><%= workout.name %></div>
+<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_type %></div>
+<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center">
+  <% if workout.descriptions.any? %>
+    <p class="uppercase"><%= workout.descriptions.map(&:division).join(', ') %></p>
+  <% end %>
+</div>
+<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center gap-5">
+  <%= link_to edit_admin_workout_path(workout) do %>
+    <i class="fa-regular fa-pen-to-square"></i>
+  <% end %>
+  <%= link_to workout, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+    <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
   <% end %>
 </div>

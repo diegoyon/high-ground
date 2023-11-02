@@ -8,7 +8,7 @@ module Admin
     include TimeConversion
 
     def index
-      @workouts = Workout.order(:workout_number)
+      @workouts = Workout.order(:workout_number).includes(:descriptions)
     end
 
     def show; end
