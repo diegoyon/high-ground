@@ -1,12 +1,12 @@
-<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_number %></div>
-<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center capitalize"><%= workout.name %></div>
-<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_type %></div>
-<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center">
+<div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= index %></div>
+<div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center capitalize"><%= workout.name %></div>
+<div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_type %></div>
+<div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center">
   <% if workout.divisions.any? %>
     <p class="uppercase"><%= workout.divisions.map(&:name).join(', ') %></p>
   <% end %>
 </div>
-<div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center gap-5">
+<div class="<%= index.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center gap-5">
   <%= link_to edit_admin_workout_path(workout) do %>
     <i class="fa-regular fa-pen-to-square"></i>
   <% end %>

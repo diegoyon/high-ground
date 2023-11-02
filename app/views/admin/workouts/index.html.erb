@@ -8,12 +8,14 @@
     <%= link_to 'New workout', new_admin_workout_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="workouts" class="grid grid-cols-[1fr_3fr_3fr_3fr_5fr] mt-10">
+  <div id="workouts" class="grid grid-cols-[1fr_repeat(4,_3fr)] mt-10">
     <p class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">No.</p>
     <p class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Name</p>
     <p class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Type</p>
     <p class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Divisions</p>
     <p class="bg-black text-white uppercase font-semibold flex text-xs items-center justify-center py-2">Actions</p>
-    <%= render @workouts %>
+    <% @workouts.each_with_index do |workout, index| %>
+      <%= render 'workout', { workout:, index: } %>
+    <% end %>
   </div>
 </div>
