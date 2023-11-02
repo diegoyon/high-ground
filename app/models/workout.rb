@@ -2,9 +2,9 @@
 
 class Workout < ApplicationRecord
   has_many :scores, dependent: :destroy
-  has_many :descriptions, inverse_of: :workout, dependent: :destroy
+  has_many :divisions, inverse_of: :workout, dependent: :destroy
 
-  accepts_nested_attributes_for :descriptions, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :divisions, reject_if: :all_blank, allow_destroy: true
 
   validates :name, presence: true
   validates :workout_type, presence: true

@@ -1,5 +1,5 @@
 class RemoveDescriptionFromWorkouts < ActiveRecord::Migration[7.0]
   def change
-    remove_column :workouts, :description
+    remove_column :workouts, :description, :text
   end
 end

@@ -36,14 +36,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_054229) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "descriptions", force: :cascade do |t|
-    t.text "text"
-    t.string "division"
+  create_table "divisions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
     t.bigint "workout_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["division", "workout_id"], name: "index_descriptions_on_division_and_workout_id", unique: true
-    t.index ["workout_id"], name: "index_descriptions_on_workout_id"
+    t.index ["name", "workout_id"], name: "index_divisions_on_name_and_workout_id", unique: true
+    t.index ["workout_id"], name: "index_divisions_on_workout_id"
   end
 
   create_table "fri_checkouts", force: :cascade do |t|
@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_054229) do
     t.index ["workout_number"], name: "index_workouts_on_workout_number", unique: true
   end
 
-  add_foreign_key "descriptions", "workouts"
+  add_foreign_key "divisions", "workouts"
   add_foreign_key "payments", "athletes"
   add_foreign_key "scores", "athletes"
   add_foreign_key "scores", "workouts"

@@ -26,21 +26,21 @@
     <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
 
-  <!-- Descriptions Fields -->
-  <h3>Descriptions</h3>
-  <div id='descriptions' data-controller="nested-form">
+  <!-- Division Fields -->
+  <h3>Division</h3>
+  <div id='divisions' data-controller="nested-form">
     <template data-nested-form-target='template'>
-      <%= form.fields_for :descriptions, Description.new, child_index: 'NEW_RECORD' do |description| %>
-        <%= render 'description_fields', f: description %>
+      <%= form.fields_for :divisions, Division.new, child_index: 'NEW_RECORD' do |division| %>
+        <%= render 'division_fields', f: division %>
       <% end %>
     </template>
 
-    <%= form.fields_for :descriptions do |description| %>
-      <%= render 'description_fields', f: description %>
+    <%= form.fields_for :divisions do |division| %>
+      <%= render 'division_fields', f: division %>
     <% end %>
 
     <div data-nested-form-target='links' >
-      <%= link_to 'Add Description', '#', class: '', data: { action: 'click->nested-form#add_association' } %>
+      <%= link_to 'Add Division', '#', class: '', data: { action: 'click->nested-form#add_association' } %>
     </div>
   </div>
 

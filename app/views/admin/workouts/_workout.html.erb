@@ -2,8 +2,8 @@
 <div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center capitalize"><%= workout.name %></div>
 <div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center"><%= workout.workout_type %></div>
 <div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center">
-  <% if workout.descriptions.any? %>
-    <p class="uppercase"><%= workout.descriptions.map(&:division).join(', ') %></p>
+  <% if workout.divisions.any? %>
+    <p class="uppercase"><%= workout.divisions.map(&:name).join(', ') %></p>
   <% end %>
 </div>
 <div class="<%= workout.workout_number.odd? ? 'bg-gray-100' : '' %> h-20 text-lg font-semibold flex items-center border border-gray-200 justify-center gap-5">

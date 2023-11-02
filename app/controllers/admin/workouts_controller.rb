@@ -8,12 +8,12 @@ module Admin
     include TimeConversion
 
     def index
-      @workouts = Workout.order(:workout_number).includes(:descriptions)
+      @workouts = Workout.order(:workout_number).includes(:divisions)
     end
 
     def new
       @workout = Workout.new
-      @workout.descriptions.build
+      @workout.divisions.build
     end
 
     def edit; end
@@ -26,7 +26,7 @@ module Admin
       @workout = Workout.new(modified_workout_params)
 
       if @workout.save
-        redirect_to admin_workout_url(@workout), notice: 'Workout was successfully created.'
+        redirect_to admin_workouts_url, notice: 'Workout was successfully created.'
       else
         render :new, status: :unprocessable_entity
       end
@@ -39,7 +39,7 @@ module Admin
       end
 
       if @workout.update(modified_workout_params)
-        redirect_to admin_workout_url(@workout), notice: 'Workout was successfully updated.'
+        redirect_to admin_workouts_url, notice: 'Workout was successfully updated.'
       else
         render :edit, status: :unprocessable_entity
       end
@@ -58,8 +58,8 @@ module Admin
     end
 
     def workout_params
-      params.require(:workout).permit(:name, :description, :workout_type, :workout_number, :tiebreak_type, :time_cap,
-                                      :visible, descriptions_attributes: %i[id text division _destroy])
+      params.require(:workout).permit(:name, :workout_type, :workout_number, :tiebreak_type, :time_cap,
+                                      :visible, divisions_attributes: %i[id name description _destroy])
     end
 
     def transform_time_cap_to_seconds(modified_workout_params)
