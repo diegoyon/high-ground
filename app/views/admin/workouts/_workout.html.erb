@@ -10,7 +10,7 @@
   <%= link_to edit_admin_workout_path(workout) do %>
     <i class="fa-regular fa-pen-to-square"></i>
   <% end %>
-  <%= link_to workout, data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
+  <%= link_to admin_workout_path(workout), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>
     <i class="fa-regular fa-trash-can" style="color: #ff0000;"></i>
   <% end %>
 </div>
