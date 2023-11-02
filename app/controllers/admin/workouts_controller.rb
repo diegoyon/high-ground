@@ -3,15 +3,13 @@
 module Admin
   class WorkoutsController < ApplicationController
     before_action :authenticate_user!
-    before_action :set_workout, only: %i[show edit update destroy]
+    before_action :set_workout, only: %i[edit update destroy]
 
     include TimeConversion
 
     def index
       @workouts = Workout.order(:workout_number).includes(:descriptions)
     end
-
-    def show; end
 
     def new
       @workout = Workout.new
