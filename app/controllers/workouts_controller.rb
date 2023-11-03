@@ -3,8 +3,7 @@
 class WorkoutsController < ApplicationController
   def index
     @workout = selected_workout || default_workout
-    @divisions = selected_workout&.divisions || default_divisions
-    @division = selected_division || @workout.divisions.first
+    @division = selected_division || default_division if @workout
   end
 
   private
@@ -17,11 +16,11 @@ class WorkoutsController < ApplicationController
     Workout.visible.order(workout_number: :asc).first || nil
   end
 
-  def default_divisions
-    Workout.visible.order(workout_number: :asc).first.divisions || nil
+  def selected_division
+    @workout.divisions.find_by(name: params[:division_name].presence)
   end
 
-  def selected_division
-    Division.find(params[:division_id]) if params[:division_id].present?
+  def default_division
+    @workout.divisions.find_by(name: 'Scaled')
   end
 end

@@ -26,24 +26,6 @@
     <%= form.select :workout_type, ['Time', 'AMRAP', 'Weight'], { include_blank: true }, class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>
   </div>
 
-  <!-- Division Fields -->
-  <h3>Division</h3>
-  <div id='divisions' data-controller="nested-form">
-    <template data-nested-form-target='template'>
-      <%= form.fields_for :divisions, Division.new, child_index: 'NEW_RECORD' do |division| %>
-        <%= render 'division_fields', f: division %>
-      <% end %>
-    </template>
-
-    <%= form.fields_for :divisions do |division| %>
-      <%= render 'division_fields', f: division %>
-    <% end %>
-
-    <div data-nested-form-target='links' >
-      <%= link_to 'Add Division', '#', class: '', data: { action: 'click->nested-form#add_association' } %>
-    </div>
-  </div>
-
   <div class='my-5'>
     <%= form.label 'Tipo de tiebreak' %>
     <%= form.select :tiebreak_type, ['None', 'Time', 'AMRAP', 'Weight'], class: 'block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full' %>

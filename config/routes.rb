@@ -24,5 +24,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :leaderboard, only: [:index]
     resources :workouts, except: [:show]
+    resources :divisions, only: [:edit, :update]
   end
 end

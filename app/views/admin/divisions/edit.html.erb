@@ -1,0 +1,9 @@
+<div class="mx-auto md:w-2/3 w-full mb-5">
+  <h1 class="font-bold text-4xl">Editing division</h1>
+  <h2>Workout: <%= @division.workout.workout_number %></h2>
+  <h3>Division: <%= @division.name %></h3>
+
+  <%= render "form", division: @division %>
+
+  <%= link_to "Back to workouts", admin_workouts_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+</div>

@@ -12,9 +12,19 @@ class Workout < ApplicationRecord
   validates :workout_number, presence: true, uniqueness: true
   validates :time_cap, presence: true
 
+  after_create :create_divisions
+
   scope :visible, -> { where(visible: true) }
 
   def formatted_name
     "Workout #{workout_number}"
+  end
+
+  private
+
+  def create_divisions
+    divisions.create(name: 'Scaled')
+    divisions.create(name: 'Intermedio')
+    divisions.create(name: "Rx'd")
   end
 end

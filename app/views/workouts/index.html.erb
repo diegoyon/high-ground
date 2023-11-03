@@ -9,21 +9,17 @@
 
 <div class="bg-hg-black">
   <div class="flex justify-center py-5">
-    <%= form_with url: "/workouts", method: :get, data: { controller: "workout-division", turbo_frame: "workout-frame" } do |form|%>
-      <%= form.collection_select :workout_number, Workout.visible.order(:workout_number), :workout_number, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->workout-division#submit' } %>
+    <%= form_with url: "/workouts", method: :get, data: { controller: "workout-division", turbo_frame: "workout-description" } do |form|%>
+      <%= form.collection_select :workout_number, Workout.visible.order(:workout_number), :workout_number, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->workout-division#submit', workout_division_target: 'workoutSelect' } %>
+      <%= form.select :division_name, options_for_select(['Scaled', 'Intermedio', "Rx'd"], 'Scaled'), {}, data: { action: 'change->workout-division#submit' } %>
     <% end %>
   </div>
 </div>
 
-<turbo-frame id="workout-frame">
-  <%= form_with url: "/workouts", method: :get, data: { controller: "workout-division", turbo_frame: "division-frame" } do |form|%>
-    <%= form.collection_select :division_id, @divisions, :id, :name, {}, data: { action: 'change->workout-division#submit' } %>
+<turbo-frame id="workout-description">
+  <% if @division %>
+    <%#= render @division %>
+    <p><%= @division.description %></p>
   <% end %>
-  <turbo-frame id="division-frame">
-    <% if @division %>
-      <%#= render @division %>
-      <p><%= @division.description %></p>
-    <% end %>
-  </turbo-frame>
 </turbo-frame>
 

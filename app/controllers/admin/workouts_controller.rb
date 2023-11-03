@@ -59,7 +59,7 @@ module Admin
 
     def workout_params
       params.require(:workout).permit(:name, :workout_type, :workout_number, :tiebreak_type, :time_cap,
-                                      :visible, divisions_attributes: %i[id name description _destroy])
+                                      :visible)
     end
 
     def transform_time_cap_to_seconds(modified_workout_params)
