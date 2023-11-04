@@ -8,18 +8,26 @@
 </div>
 
 <div class="bg-hg-black">
-  <div class="flex justify-center py-5">
-    <%= form_with url: "/workouts", method: :get, data: { controller: "workout-division", turbo_frame: "workout-description" } do |form|%>
-      <%= form.collection_select :workout_number, Workout.visible.order(:workout_number), :workout_number, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->workout-division#submit', workout_division_target: 'workoutSelect' } %>
-      <%= form.select :division_name, options_for_select(['Scaled', 'Intermedio', "Rx'd"], 'Scaled'), {}, data: { action: 'change->workout-division#submit' } %>
-    <% end %>
+  <div class="flex flex-col lg:flex-row lg:w-full lg:container lg:mx-auto lg:gap-12">
+    <div class="py-10 lg:flex-1">
+      <div class="px-5 flex container mx-auto">
+        <%= form_with url: "/workouts", method: :get, data: { controller: "workout-division", turbo_frame: "workout-description" }, class: "flex flex-col w-full gap-3" do |form|%>
+          <div class="flex flex-col">
+            <%= form.label "Workout", class: "text-hg-cyan text-lg" %>
+            <%= form.collection_select :workout_number, Workout.visible.order(:workout_number), :workout_number, ->(workout) { workout.formatted_name }, {}, data: { action: 'change->workout-division#submit', workout_division_target: 'workoutSelect' }, class: "py-5 bg-transparent text-white border border-white focus:border-white" %>
+          </div>
+          <div class="flex flex-col">
+            <%= form.label "Categoría", class: "text-hg-cyan text-lg" %>
+            <%= form.select :division_name, options_for_select(['Scaled', 'Intermedio', "Rx'd"], 'Scaled'), {}, data: { action: 'change->workout-division#submit' }, class: "py-5 bg-transparent text-white border border-white focus:border-white" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <turbo-frame id="workout-description" class="flex-[2_2_0%]">
+      <% if @division %>
+        <%= render "division", division: @division %>
+      <% end %>
+    </turbo-frame>
   </div>
 </div>
-
-<turbo-frame id="workout-description">
-  <% if @division %>
-    <%#= render @division %>
-    <p><%= @division.description %></p>
-  <% end %>
-</turbo-frame>
-
