@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1 class="text-hg-purple">Bienvenido a High Ground, <%= @athlete.first_name %></h1>
+    <p>
+      Has sido registrado exitosamente,
+      tus datos registrados son los siguientes:
+    </p>
+    <p>Nombre(s): <%= @athlete.first_name %></p>
+    <p>Apellido(s): <%= @athlete.last_name %></p>
+    <p>Email: <%= @athlete.email %></p>
+    <p>Categoría: <%= @athlete.division %></p>
+    <p>Talla de T-shirt: <%= @athlete.tshirt_size %></p>
+    <% if @athlete.payment.paymentable_type = "FriCheckout"%>
+      <p>Nombre para la T-shirt: <%= @athlete.tshirt_name %></p>
+    <% end %>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
