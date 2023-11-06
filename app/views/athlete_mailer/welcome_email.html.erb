@@ -2,21 +2,64 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      body {
+        margin: 5rem;
+        padding: 0;
+        font-family: Roboto, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.015em;
+        line-height: 1.375;
+      }
+
+      .card {
+        border: 1px solid black;
+        width: fit-content;
+        padding: 0.25rem 1rem;
+      }
+
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .bold {
+        font-weight: 600;
+      }
+
+      .underline {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
-    <h1 class="text-hg-purple">Bienvenido a High Ground, <%= @athlete.first_name %></h1>
-    <p>
-      Has sido registrado exitosamente,
-      tus datos registrados son los siguientes:
-    </p>
-    <p>Nombre(s): <%= @athlete.first_name %></p>
-    <p>Apellido(s): <%= @athlete.last_name %></p>
-    <p>Email: <%= @athlete.email %></p>
-    <p>Categoría: <%= @athlete.division %></p>
-    <p>Talla de T-shirt: <%= @athlete.tshirt_size %></p>
-    <% if @athlete.payment.paymentable_type = "FriCheckout"%>
-      <p>Nombre para la T-shirt: <%= @athlete.tshirt_name %></p>
-    <% end %>
-    <p>Thanks for joining and have a great day!</p>
+    <div class="content">
+      <h1>¡Bienvenido(a) a High Ground 2023 <%= @athlete.first_name %>!</h1>
+      
+      <p>Estamos emocionados de tenerte como parte de nuestro evento y esperamos que estés listo(a) para enfrentar desafíos emocionantes y alcanzar nuevas alturas en tu fitness.</h1>
+
+      <p>Para asegurarnos de que tengamos toda la información necesaria para participar en este evento, te mostramos los datos que tenemos registrados de ti:</p>
+      
+      <div class="card">
+        <p><span class="bold">Nombre(s):</span> <%= @athlete.first_name %></p>
+        <p><span class="bold">Apellido(s):</span> <%= @athlete.last_name %></p>
+        <p><span class="bold">Email:</span> <%= @athlete.email %></p>
+        <p><span class="bold">Categoría:</span> <span class="underline"><%= @athlete.division %></span></p>
+        <p><span class="bold">Box:</span> <%= @athlete.box %></p>
+      </div>
+
+      <p>Es importante que revises estos datos y te asegures de que sean correctos. Si encuentras algún error o necesitas realizar alguna modificación en tu información, por favor responde este correo antes del jueves 9 de noviembre. Después de esa fecha, no podremos aceptar cambios en los datos registrados.</p>
+
+      <p>Adjunto a este correo encontrarás un archivo que deberás imprimir y llevar contigo para que nos lo entregues en la entrada del lugar del evento. Este documento es esencial para tu participación en la competencia, y sin el documento firmado, lamentablemente no podrás competir.</p>
+
+      <p>Agradecemos tu compromiso con High Ground Fitness Competition 2023 y estamos ansiosos por verte en acción. Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en ponerte en contacto con nuestro equipo organizador a través de este correo o por redes sociales.</p>
+
+      <p>Te deseamos mucho éxito en el evento y esperamos que disfrutes al máximo de esta experiencia. ¡Nos vemos este 18 de noviembre!</p>
+
+      <p>Atentamente,</p>
+
+      <p>High Ground</p>
+    </div>
   </body>
 </html>
