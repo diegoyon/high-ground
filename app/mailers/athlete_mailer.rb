@@ -6,7 +6,7 @@ class AthleteMailer < ApplicationMailer
   def welcome_email
     @athlete = params[:athlete]
     attachments['descarga_de_responsabilidades.pdf'] = descarga_de_responsabilidades_file
-    mail(bcc: @athlete.email, subject: "¡Bienvenido(a) a High Ground 2023 #{@athlete.first_name}!")
+    mail(to: @athlete.email, subject: "¡Bienvenido(a) a High Ground 2023 #{@athlete.first_name}!")
   end
 
   private
