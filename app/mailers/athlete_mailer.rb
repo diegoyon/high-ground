@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AthleteMailer < ApplicationMailer
-  default from: 'notifications@example.com'
+  default from: 'highgroundfitnesscompetition@gmail.com'
 
   def welcome_email
     @athlete = params[:athlete]
