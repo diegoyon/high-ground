@@ -262,3 +262,24 @@ athlete.build_payment(
 )
 
 athlete.save!
+
+# #####################15
+athlete = Athlete.new(
+  first_name: 'Dixon',
+  last_name: 'Urbina',
+  email: 'dixonurbina@icloud.com',
+  phone: '42193692',
+  tshirt_size: 'XL',
+  box: '1821 Independence CF',
+  division: 'Intermedio Masculino'
+)
+
+deposit = BankDeposit.create!(amount: 0)
+
+athlete.build_payment(
+  payment_status: 'completed',
+  paymentable: deposit
+)
+
+athlete.save!
+

@@ -5,4 +5,8 @@ class AthleteMailerPreview < ActionMailer::Preview
   def welcome_email
     AthleteMailer.with(athlete: Athlete.first).welcome_email
   end
+
+  def information_email
+    AthleteMailer.with(athlete: Athlete.first).information_email
+  end
 end

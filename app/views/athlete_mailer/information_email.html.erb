@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      body {
+        margin: 3rem;
+        padding: 0;
+        font-family: Roboto, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        letter-spacing: 0.015em;
+        line-height: 1.375;
+      }
+
+      .content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .bold {
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>¡Hola <%= @athlete.first_name %>!</h1>
+      
+      <p>Estamos a dos días de empezar High Ground 2023. Queremos proporcionarte información adicional importante sobre detalles relevantes para el evento.</h1>
+
+      <p>La entrega de kits se llevará a cabo mañana viernes 17 de noviembre en las instalaciones de CrossFit Xela, de 4:00 PM a 8:00 PM. En caso de que no puedas recoger tu kit el viernes, podrás recogerlo el día sábado 18 de noviembre de 6:30 AM a 7:30 AM en el lugar del evento.</p>
+
+      <p>También queremos informarte sobre los precios del parqueo y de espectadores:</p>
+
+      <ul>
+        <li><p>El precio de la entrada para espectadores es de Q.50 por día.</p></li>
+        <li><p>El precio del parqueo es de Q.30 por día.</p></li>
+      </ul>
+
+      <p>Esto se cancela en la entrada del lugar. <span class="bold">ÚNICA FORMA DE PAGO ES EN EFECTIVO.</span></p>
+
+      <p>Adjunto a este correo encontrarás un archivo que deberás imprimir y llevar contigo para que nos lo entregues a la hora de recoger tu kit el viernes, o el sábado antes de empezar el primer evento. Este documento es esencial para tu participación en la competencia, y sin el documento firmado, no podrás competir.</p>
+
+      <p>Adicional a esto, adjunto a este correo encontrarás el horario detallado de los heats programados para el día sábado. Revísalo cuidadosamente para que estés enterado de los horarios en los que competirás.</p>
+      
+      <p>Los horarios de los heats del domingo los estaremos publicando el día sábado por la tarde-noche ya que se adecuarán los heats dependiendo de la posición de cada atleta al final del día sábado.</p>
+
+      <p>Te deseamos mucho éxito en el evento y esperamos que disfrutes al máximo de esta experiencia. ¡Nos vemos pasado mañana!</p>
+
+      <p>Atentamente,</p>
+
+      <p>High Ground</p>
+    </div>
+  </body>
+</html>
