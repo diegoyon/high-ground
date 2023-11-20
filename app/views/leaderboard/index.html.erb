@@ -30,7 +30,7 @@
 
         </div>
         <div id="athlete_<%= athlete.id %>_details" class="max-h-0 overflow-hidden transition-all ease-in-out duration-300 flex flex-col px-10">
-          <% athlete.scores.includes(:workout).each do |score| %>
+          <% athlete.scores.includes(:workout).joins(:workout).order("workouts.workout_number").each do |score| %>
             <p class="text-sm leading-loose">
               <%= score.workout.name %>: <%= format_rank(score.rank) %> (<%= format_score(score) %>) <%= score.points %>pts
             </p>

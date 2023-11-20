@@ -1,6 +1,6 @@
-athletes = Athlete.ready.where(division: "RX Masculino").order(:created_at)
+athletes = Athlete.ready.where(division: "Scaled Masculino").order(:rank)
 
-csv_file_path = 'rx_masculino.csv'
+csv_file_path = 'scaled_masculino.csv'
 CSV.open(csv_file_path, 'wb') do |csv|
   csv << [
     'Nombre',
