@@ -283,3 +283,13 @@ athlete.build_payment(
 
 athlete.save!
 
+
+amount = 0
+athletes_with_fri_checkout.each do |athlete|
+  amount += athlete.payment.paymentable.fri_webhook_response.dig('amount').to_i
+end
+
+amount = 0
+athletes_with_deposit_checkout.each do |athlete|
+  amount += athlete.payment.paymentable.amount
+end
